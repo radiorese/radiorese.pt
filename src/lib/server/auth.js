@@ -35,3 +35,8 @@ export async function verifySession(sessionToken) {
     return null;
   }
 }
+
+export async function logOut() {
+  cookie.remove('sessionToken');
+  throw redirect(302, '/studio/login');
+}

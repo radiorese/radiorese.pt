@@ -32,19 +32,6 @@ export const actions = {
 				maxAge: 60 * 60 * 24 // 1 day
 			});
 
-			const adminRes = await db.query('SELECT * FROM admin WHERE account_id = $1 LIMIT 1', [
-				user.id
-			]);
-			if (adminRes.rows[0]) {
-				//throw redirect(302, '../(authed)/(admin)/episodes');
-			}
-
-			const memberRes = await db.query('SELECT * FROM member WHERE account_id = $1 LIMIT 1', [
-				user.id
-			]);
-			if (memberRes.rows[0]) {
-				//throw redirect(302, '../(authed)/(member)/profile');
-			}
 		} catch (err) {
 			console.error('Database error:', err);
 			return { success: false, message: 'Database error' };
