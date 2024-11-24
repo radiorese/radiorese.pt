@@ -1,7 +1,6 @@
 // src/hooks.server.js
 import { redirect } from '@sveltejs/kit';
 import { verifySession } from '$lib/server/auth.js';
-import { logOut } from '$lib/server/auth.js';
 
 const adminPaths = [
   '/studio/schedule',

@@ -29,14 +29,9 @@ export async function verifySession(sessionToken) {
     const adminRes = await db.query('SELECT * FROM admin WHERE account_id = $1 LIMIT 1', [user.id]);
     const isAdmin = adminRes.rows.length > 0;
 
-    return { isAdmin, userId: user.id };
+    return { isAdmin, id: user.id, at: user.at };
   } catch (err) {
     console.error('Error verifying session:', err);
     return null;
   }
-}
-
-export async function logOut() {
-  cookie.remove('sessionToken');
-  throw redirect(302, '/studio/login');
 }
