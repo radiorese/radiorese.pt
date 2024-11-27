@@ -1,6 +1,5 @@
 // src/routes/login/+page.server.js
 import { db } from '$lib/db.js';
-import { redirect } from '@sveltejs/kit';
 import { randomBytes } from 'crypto';
 
 export const actions = {

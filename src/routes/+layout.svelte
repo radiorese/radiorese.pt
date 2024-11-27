@@ -10,14 +10,20 @@
 		--main4: rgb(113, 113, 113);
 		--main5: rgb(65, 65, 65);
 		--secondary: rgb(18, 18, 18);
+		--offSecondary: rgb(25, 25, 25);
 
-		--headerHeight:60px;
-		--globalMargin:2rem;
+		--red: rgb(255, 0, 0);
+		--green: rgb(0, 255, 0);
+
+		--headerHeight: 60px;
+		--globalMargin: 2rem;
+		--doubleGlobalMargin: 4rem;
 	}
 
 	@media (max-width: 760px) {
-		:root{
-			--globalMargin:1rem;
+		:root {
+			--globalMargin: 1rem;
+			--doubleGlobalMargin: 2rem;
 		}
 	}
 
@@ -35,6 +41,7 @@
 
 	:global(*) {
 		box-sizing: border-box;
+
 	}
 
 	:global(button) {
@@ -48,7 +55,7 @@
 		cursor: pointer;
 	}
 
-	:global(h1, h2, h3, h4, h5, p, a) {
+	:global(h1, h2, h3, h4, h5, p, a, b, input[type=text], input[type=email], input[type=tel], input[type=password]) {
 		margin: 0;
 		font-weight: normal;
 		text-align: left;
@@ -61,40 +68,70 @@
 		background-color: var(--secondary);
 	}
 
-    :global(body) {
-        margin-right: var(--globalMargin);
-        margin-left: var(--globalMargin);
-        margin-bottom: var(--globalMargin);
-        margin-top:0;
-    }
+	:global(body) {
+		margin-right: var(--globalMargin);
+		margin-left: var(--globalMargin);
+		margin-bottom: var(--globalMargin);
+		margin-top: 0;
+	}
 
-	:global(h1, h2, h3, h4, h5, p, a) {
+	:global(h1, h2, h3, h4, h5, p, a, b, input[type=text], input[type=email], input[type=tel], input[type=password]) {
 		font-family: 'ApfelGrotezkRegular', serif;
 		color: var(--main1);
 		text-decoration: none;
 	}
 
+	:global(input[type=text], input[type=email], input[type=tel], input[type=password]){
+                height: 3rem;
+                background-color: transparent;
+                color: var(--main1);
+                padding: 1rem;
+            }
+
 	:global(.bold) {
 		font-family: 'ApfelGrotezkBold', serif;
 	}
 
-    :global(.glassMorphic) {
+	:global(.glassMorphic) {
 		background: linear-gradient(0deg, rgba(18, 18, 18, 0.6) 0%, rgba(18, 18, 18, 0.6) 100%),
 			linear-gradient(171deg, rgba(255, 255, 255, 0.01) 0.19%, rgba(255, 255, 255, 0) 101.78%);
 		backdrop-filter: blur(37.5px);
 	}
 
-    :global(.tSize1) {
-        font-size: 1rem;
-    }
+	:global(.solidBorder) {
+		border: 1px solid var(--main3);
+	}
 
-    :global(.tSize2) {
-        font-size: 1.5rem;
-    }
+	:global(.dashedBorder) {
+		border: 1px dashed var(--main3);
+	}
 
-    :global(.tSize3) {
-        font-size: 2rem;
-    }
+	:global(.tSize1) {
+		font-size: 1rem;
+	}
+
+	:global(.tSize2) {
+		font-size: 1.5rem;
+	}
+
+	:global(.tSize3) {
+		font-size: 2rem;
+	}
+
+	:global(.iconSize1) {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	:global(.iconSize2) {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+
+	:global(.iconSize3) {
+		width: 2rem;
+		height: 2rem;
+	}
 
 	:global(.cMain1) {
 		color: var(--main1);
@@ -118,5 +155,129 @@
 
 	:global(.cSecondary) {
 		color: var(--secondary);
+	}
+
+	:global(.cOffSecondary) {
+		color: var(--offSecondary);
+	}
+
+	:global(.cRed) {
+		color: var(--red);
+	}
+
+	:global(.cGreen) {
+		color: var(--green);
+	}
+
+	/*border radius*/
+
+	:global(.bRadius1) {
+		border-radius: 1rem;
+	}
+
+	:global(.bRadius2) {
+		border-radius: 4rem;
+	}
+
+	:global(.bRadius3) {
+		border-radius: 1000rem;
+	}
+
+	/* spacing*/
+
+	:global(.mBottom-xs) {
+		margin-bottom: 0.128em;
+	}
+
+	:global(.mBottom-s) {
+		margin-bottom: 0.272em;
+	}
+
+	:global(.mBottom-m) {
+		margin-bottom: 0.618em;
+	}
+
+	:global(.mBottom-l) {
+		margin-bottom: 1em;
+	}
+
+	:global(.mBottom-xl) {
+		margin-bottom: 1.618em;
+	}
+
+	:global(.mBottom-xxl) {
+		margin-bottom: 2.618em;
+	}
+
+	:global(.mTop-xs) {
+		margin-top: 0.128em;
+	}
+
+	:global(.mTop-s) {
+		margin-top: 0.272em;
+	}
+
+	:global(.mTop-m) {
+		margin-top: 0.618em;
+	}
+
+	:global(.mTop-l) {
+		margin-top: 1em;
+	}
+
+	:global(.mTop-xl) {
+		margin-top: 1.618em;
+	}
+
+	:global(.mTop-xxl) {
+		margin-top: 2.618em;
+	}
+
+	:global(.mLeft-xs) {
+		margin-left: 0.128em;
+	}
+
+	:global(.mLeft-s) {
+		margin-left: 0.272em;
+	}
+
+	:global(.mLeft-m) {
+		margin-left: 0.618em;
+	}
+
+	:global(.mLeft-l) {
+		margin-left: 1em;
+	}
+
+	:global(.mLeft-xl) {
+		margin-left: 1.618em;
+	}
+
+	:global(.mLeft-xxl) {
+		margin-left: 2.618em;
+	}
+
+	:global(.mRight-xs) {
+		margin-right: 0.128em;
+	}
+
+	:global(.mRight-s) {
+		margin-right: 0.272em;
+	}
+
+	:global(.mRight-m) {
+		margin-right: 0.618em;
+	}
+
+	:global(.mRight-l) {
+		margin-right: 1em;
+	}
+
+	:global(.mRight-xl) {
+		margin-right: 1.618em;
+	}
+
+	:global(.mRight-xxl) {
+		margin-right: 2.618em;
 	}
 </style>
