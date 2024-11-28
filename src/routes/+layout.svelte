@@ -41,7 +41,6 @@
 
 	:global(*) {
 		box-sizing: border-box;
-
 	}
 
 	:global(button) {
@@ -55,7 +54,20 @@
 		cursor: pointer;
 	}
 
-	:global(h1, h2, h3, h4, h5, p, a, b, input[type=text], input[type=email], input[type=tel], input[type=password]) {
+	:global(
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			p,
+			a,
+			b,
+			input[type='text'],
+			input[type='email'],
+			input[type='tel'],
+			input[type='password']
+		) {
 		margin: 0;
 		font-weight: normal;
 		text-align: left;
@@ -75,18 +87,31 @@
 		margin-top: 0;
 	}
 
-	:global(h1, h2, h3, h4, h5, p, a, b, input[type=text], input[type=email], input[type=tel], input[type=password]) {
+	:global(
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			p,
+			a,
+			b,
+			input[type='text'],
+			input[type='email'],
+			input[type='tel'],
+			input[type='password']
+		) {
 		font-family: 'ApfelGrotezkRegular', serif;
 		color: var(--main1);
 		text-decoration: none;
 	}
 
-	:global(input[type=text], input[type=email], input[type=tel], input[type=password]){
-                height: 3rem;
-                background-color: transparent;
-                color: var(--main1);
-                padding: 1rem;
-            }
+	:global(input[type='text'], input[type='email'], input[type='tel'], input[type='password']) {
+		height: 3rem;
+		background-color: transparent;
+		color: var(--main1);
+		padding: 1rem;
+	}
 
 	:global(.bold) {
 		font-family: 'ApfelGrotezkBold', serif;
@@ -96,6 +121,10 @@
 		background: linear-gradient(0deg, rgba(18, 18, 18, 0.6) 0%, rgba(18, 18, 18, 0.6) 100%),
 			linear-gradient(171deg, rgba(255, 255, 255, 0.01) 0.19%, rgba(255, 255, 255, 0) 101.78%);
 		backdrop-filter: blur(37.5px);
+	}
+
+	:global(.noBorder) {
+		border: none;
 	}
 
 	:global(.solidBorder) {

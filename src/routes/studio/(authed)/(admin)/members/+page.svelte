@@ -1,10 +1,9 @@
 <script>
 	import addIcon from '$lib/icons/add.svg';
+	import editIcon from '$lib/icons/edit.svg';
 	import { onMount } from 'svelte';
 
-	//fetch data
 	export let data;
-	console.log(data);
 	let activeMembers = data.activeMembers;
 	let inactiveMembers = data.inactiveMembers;
 	let numberOfActiveMembers = activeMembers.length;
@@ -13,9 +12,25 @@
 	//Add member popup
 	import AddMemberPopup from './addMemberPopup.svelte';
 	let showAddMemberPopup = false;
-	function toggleMemberPopup() {
+	let isActive = true;
+	function toggleAddMemberPopup(active) {
+		isActive = active;
 		showAddMemberPopup = !showAddMemberPopup;
 	}
+
+	//Edit member popup
+	import EditMemberPopup from './editMemberPopup.svelte';
+	let showEditMemberPopup = false;
+	let isEditing = false;
+	let selectedMember = null;
+	function toggleEditMemberPopup(event, member) {
+		if (event && member) {
+			isEditing = event.target.tagName === 'IMG';
+			selectedMember = member;
+		}
+		showEditMemberPopup = !showEditMemberPopup;
+	}
+
 	export let form;
 
 	//Download credentials
@@ -34,51 +49,64 @@
 
 <!-- Forms -->
 {#if showAddMemberPopup}
-	<AddMemberPopup on:close={toggleMemberPopup} />
+	<AddMemberPopup {isActive} on:close={toggleAddMemberPopup} />
 {/if}
-<div class="blurLayer glassMorphic {showAddMemberPopup ? '' : 'hidden'}"></div>
+
+{#if showEditMemberPopup}
+	<EditMemberPopup {isEditing} {selectedMember} on:close={toggleEditMemberPopup} />
+{/if}
+
+<div class="blurLayer glassMorphic {showAddMemberPopup || showEditMemberPopup ? '' : 'hidden'}"></div>
 
 <!-- Form feedback -->
 {#if form?.error}
-	<p class="cRed">Erro: {form.error}</p>
+	<p class="cRed">Falha 👿 {form.error}</p>
 {/if}
 
 {#if form?.success}
-	<p class="cGreen">Sucesso: {form.success}</p>
+	<p class="cGreen">Conseguiste 🫰 {form.success}</p>
 {/if}
 
 <!-- Active Members -->
 <h1 class="mBottom-m mTop-m">Membros Ativos <b class="cMain4">({numberOfActiveMembers})</b></h1>
 <div class="cardsDiv mBottom-xxl">
-	<button class="memberCard bRadius3 dashedBorder" on:click={toggleMemberPopup}>
+
+	<button class="memberCard bRadius3 dashedBorder" on:click={() => toggleAddMemberPopup(true)}>
 		<p class="mRight-m tSize1">Adicionar</p>
 		<img src={addIcon} alt="adicionar" class="iconSize1" />
 	</button>
+
 	{#if activeMembers}
 		{#each activeMembers as member}
-			<button class="memberCard solidBorder bRadius3">
+			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
 				<p class="mRight-m tSize1">{member.name}</p>
-				<p class="cMain4 tSize1">@{member.at}</p>
+				<p class="mRight-l cMain4 tSize1">@{member.at}</p>
+				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
 	{/if}
+
 </div>
 
 <!-- Inactive Members -->
 <h1 class="mBottom-m mTop-l">Membros Inativos <b class="cMain4">({numberOfInactiveMembers})</b></h1>
 <div class="cardsDiv mBottom-xxl">
-	<button class="memberCard bRadius3 dashedBorder" on:click={toggleMemberPopup}>
+
+	<button class="memberCard bRadius3 dashedBorder" on:click={() => toggleAddMemberPopup(false)}>
 		<p class="mRight-m tSize1">Adicionar</p>
 		<img src={addIcon} alt="adicionar" class="iconSize1" />
 	</button>
+
 	{#if inactiveMembers}
 		{#each inactiveMembers as member}
-			<button class="memberCard solidBorder bRadius3">
+			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
 				<p class="mRight-m tSize1">{member.name}</p>
-				<p class="cMain4 tSize1">@{member.at}</p>
+				<p class="mRight-l cMain4 tSize1">@{member.at}</p>
+				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
 	{/if}
+
 </div>
 
 <style>
@@ -92,7 +120,7 @@
 		align-items: center;
 	}
 
-	.memberCard:nth-child(1):hover {
+	.memberCard:hover {
 		background-color: var(--offSecondary);
 	}
 

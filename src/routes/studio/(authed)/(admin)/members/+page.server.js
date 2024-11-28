@@ -1,23 +1,10 @@
 import { db } from '$lib/db';
-import { error } from '@sveltejs/kit';
+import { fetchActiveMembers, fetchInactiveMembers } from '$lib/server/members.js';
 
 export async function load() {
     try {
-
-        let activeMembers = await db.query('SELECT * FROM member WHERE isactive = true ORDER BY name ASC');
-        activeMembers = activeMembers.rows;
-        for (let row of activeMembers) {
-            let memberAt = await db.query('SELECT * FROM account WHERE id = $1', [row.account_id]);
-            row.at = memberAt.rows[0] ?.at || null;
-        }
-
-        let inactiveMembers = await db.query('SELECT * FROM member WHERE isactive = false ORDER BY name ASC');
-        inactiveMembers = inactiveMembers.rows;
-        for (let row of inactiveMembers) {
-            let memberAt = await db.query('SELECT * FROM account WHERE id = $1', [row.account_id]);
-            row.at = memberAt.rows[0] ?.at || null;
-        }
-
+        let activeMembers = await fetchActiveMembers();
+        let inactiveMembers = await fetchInactiveMembers();
         return {
             activeMembers,
             inactiveMembers,
@@ -70,11 +57,65 @@ export const actions = {
             };
         }
         return {
-            success: 'Membro adicionado com sucesso',
+            success: '{name} adicionado com sucesso',
             credentialText,
             fileName: `credentiais ${name}.txt`
-
         };
     },
 
+    editMember: async ({ request }) => {
+        const data = await request.formData();
+        const isActive = data.get('isActive') === 'on' ? true : false;
+        const name = data.get('name');
+        const email = data.get('email');
+        const phone = data.get('phone');
+        const at = data.get('at');
+        const id = data.get('id');
+
+
+        // check if at is already in use
+        let atCheck = await db.query('SELECT * FROM account WHERE at = $1 AND id != $2', [at, id]);
+        if (atCheck.rows.length > 0) {
+            return {
+            error: '@ já está em uso'
+            };
+        }
+
+        // check if at only has alphanumeric characters
+        if (!/^[a-zA-Z0-9]+$/.test(at)) {
+            return {
+                error: '@ inválido, é permitido apenas letras e números'
+            };
+        }
+
+        try{
+            await db.query('UPDATE member SET name = $1, isactive = $2, email = $3, phone = $4 WHERE account_id = $5', [name, isActive, email, phone, id]);
+            await db.query('UPDATE account SET at = $1 WHERE id = $2', [at, id]);
+        } catch (err) {
+            return {
+                error: 'Erro ao editar membro' + err
+            };
+        }
+        return {
+            success: '{name} editado com sucesso',
+        };
+    },
+
+    deleteMember: async ({ request }) => {
+        const data = await request.formData();
+        const id = data.get('id');
+
+        try {
+            await db.query('DELETE FROM member WHERE account_id = $1', [id]);
+            await db.query('DELETE FROM account WHERE id = $1', [id]);
+            
+        } catch (err) {
+            return {
+                error: 'Erro ao eliminar membro' + err
+            };
+        }
+        return{
+            success: '{name} apagado com sucesso'
+        }
+    },
 };
