@@ -60,15 +60,15 @@
 
 <!-- Form feedback -->
 {#if form?.error}
-	<p class="cRed">Falha 👿 {form.error}</p>
+	<p class="cRed mBottom-l">Falha 👿 {form.error}</p>
 {/if}
 
 {#if form?.success}
-	<p class="cGreen">Conseguiste 🫰 {form.success}</p>
+	<p class="cGreen mBottom-l">Conseguiste 🫰 {form.success}</p>
 {/if}
 
 <!-- Active Members -->
-<h1 class="mBottom-m mTop-m">Membros Ativos <b class="cMain4">({numberOfActiveMembers})</b></h1>
+<h1 class="mBottom-m tSize3">Membros Ativos <b class="cMain4 tSize3">({numberOfActiveMembers})</b></h1>
 <div class="cardsDiv mBottom-xxl">
 
 	<button class="memberCard bRadius3 dashedBorder" on:click={() => toggleAddMemberPopup(true)}>
@@ -89,7 +89,7 @@
 </div>
 
 <!-- Inactive Members -->
-<h1 class="mBottom-m mTop-l">Membros Inativos <b class="cMain4">({numberOfInactiveMembers})</b></h1>
+<h1 class="mBottom-m mTop-l tSize3">Membros Inativos <b class="cMain4 tSize3">({numberOfInactiveMembers})</b></h1>
 <div class="cardsDiv mBottom-xxl">
 
 	<button class="memberCard bRadius3 dashedBorder" on:click={() => toggleAddMemberPopup(false)}>
@@ -139,7 +139,7 @@
 		z-index: 1;
 		backdrop-filter: blur(12px);
 		opacity: 1;
-		transition: 0.3s;
+		transition: var(--globalTransitionTime);
 	}
 
 	.hidden {

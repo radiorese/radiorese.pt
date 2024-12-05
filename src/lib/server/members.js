@@ -50,7 +50,7 @@ export async function fetchAllMembers(){
 
 export async function fetchMemberById(id) {
     try {
-        let member = await db.query('SELECT * FROM member WHERE id = $1', [id]);
+        let member = await db.query('SELECT * FROM member WHERE account_id = $1', [id]);
         member = member.rows[0];
         let memberAt = await db.query('SELECT * FROM account WHERE id = $1', [member.account_id]);
         member.at = memberAt.rows[0] ?.at || null;

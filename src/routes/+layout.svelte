@@ -16,8 +16,11 @@
 		--green: rgb(0, 255, 0);
 
 		--headerHeight: 60px;
+
 		--globalMargin: 2rem;
 		--doubleGlobalMargin: 4rem;
+
+		--globalTransitionTime: 0.25s;
 	}
 
 	@media (max-width: 760px) {
@@ -63,10 +66,15 @@
 			p,
 			a,
 			b,
+			th,
+			td,
 			input[type='text'],
 			input[type='email'],
 			input[type='tel'],
-			input[type='password']
+			input[type='password'],
+			option,
+			select,
+			textarea
 		) {
 		margin: 0;
 		font-weight: normal;
@@ -96,21 +104,48 @@
 			p,
 			a,
 			b,
+			th,
+			td,
 			input[type='text'],
 			input[type='email'],
 			input[type='tel'],
-			input[type='password']
+			input[type='password'],
+			select,
+			option,
+			textarea
 		) {
 		font-family: 'ApfelGrotezkRegular', serif;
 		color: var(--main1);
 		text-decoration: none;
+		font-size: 1rem;
 	}
 
-	:global(input[type='text'], input[type='email'], input[type='tel'], input[type='password']) {
-		height: 3rem;
+	:global(
+			input[type='text'],
+			input[type='email'],
+			input[type='tel'],
+			input[type='password'],
+			select,
+			textarea
+		) {
+		
 		background-color: transparent;
 		color: var(--main1);
 		padding: 1rem;
+	}
+
+	:global(textarea) {
+		min-height: 10rem;
+		resize: none;
+	}
+
+	:global(option) {
+		background-color: var(--secondary);
+		color: var(--main1);
+	}
+
+	:global(option:hover)	{
+		background-color: var(--offSecondary);
 	}
 
 	:global(.bold) {
@@ -214,6 +249,20 @@
 
 	/* spacing*/
 
+	:global(.spaceBetween) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	:global(.whiteButton){
+		background-color: var(--main1);
+		color: var(--secondary);
+		padding: 0.5rem 1rem;
+		border-radius: 1rem;
+		font-size: 1rem;
+	}
+
 	:global(.mBottom-xs) {
 		margin-bottom: 0.128em;
 	}
@@ -236,6 +285,10 @@
 
 	:global(.mBottom-xxl) {
 		margin-bottom: 2.618em;
+	}
+
+	:global(.mBottom-xxxl) {
+		margin-bottom: 4.236em;
 	}
 
 	:global(.mTop-xs) {
@@ -262,6 +315,10 @@
 		margin-top: 2.618em;
 	}
 
+	:global(.mTop-xxxl) {
+		margin-top: 4.236em;
+	}
+
 	:global(.mLeft-xs) {
 		margin-left: 0.128em;
 	}
@@ -286,6 +343,10 @@
 		margin-left: 2.618em;
 	}
 
+	:global(.mLeft-xxxl) {
+		margin-left: 4.236em;
+	}
+
 	:global(.mRight-xs) {
 		margin-right: 0.128em;
 	}
@@ -308,5 +369,9 @@
 
 	:global(.mRight-xxl) {
 		margin-right: 2.618em;
+	}
+
+	:global(.mRight-xxxl) {
+		margin-right: 4.236em;
 	}
 </style>

@@ -29,8 +29,8 @@
 	];
 
 	const memberNav = [
-		{ name: 'Perfil', path: '/studio/profile', icon: profileIcon },
-		{ name: 'Programas', path: '/studio/programs', icon: programsIcon }
+		/*{ name: 'Perfil', path: '/studio/profile', icon: profileIcon },*/
+		{ name: 'Os teus programas', path: '/studio/programs', icon: programsIcon }
 	];
 
 	const nav = user.isAdmin ? adminNav : memberNav;

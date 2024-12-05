@@ -5,7 +5,9 @@ import { verifySession } from '$lib/server/auth.js';
 const adminPaths = [
   '/studio/schedule',
   '/studio/members',
-  '/studio/episodes'
+  '/studio/episodes',
+  '/studio/programs/new',
+  '/studio/programs/edit'
 ];
 
 /** @type {import('@sveltejs/kit').Handle} */
