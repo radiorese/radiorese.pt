@@ -40,10 +40,11 @@
 		</label>
 	</div>
 
-	<input type="hidden" name="creators" value={JSON.stringify(creators)} />
-	<input type="hidden" name="curators" value={JSON.stringify(curators)} />
+	
 
 	<div class="mTop-xl bRadius1">
+	<input type="hidden" name="creators" value={JSON.stringify(creators)} />
+	<input type="hidden" name="curators" value={JSON.stringify(curators)} />
 		<label for="creators" id="creators">
 			<h3>Criado Por</h3>
 			{#each Array(numberOfCreators) as _, index}
@@ -132,6 +133,8 @@
             width: calc(50% - 0.5rem);
 			background-color: var(--offSecondary);
 			padding: 1rem;
+			height: fit-content;
+
 			h3,
 			select,
 			input,

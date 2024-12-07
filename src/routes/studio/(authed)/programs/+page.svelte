@@ -17,7 +17,7 @@
 {#if userIsAdmin}
 	<div id="titleDiv">
 		<h1 class="tSize3">Programas <b class="cMain3 tSize3">({programs.length})</b></h1>
-		<a href="/studio/programs/new">
+		<a href="/studio/programs/newProgram">
 			<button class="cSecondary tSize2 whiteButton"> Novo Programa </button>
 		</a>
 	</div>

@@ -72,6 +72,7 @@
 			input[type='email'],
 			input[type='tel'],
 			input[type='password'],
+			input[type='number'],
 			option,
 			select,
 			textarea
@@ -110,6 +111,7 @@
 			input[type='email'],
 			input[type='tel'],
 			input[type='password'],
+			input[type='number'],
 			select,
 			option,
 			textarea
@@ -125,6 +127,7 @@
 			input[type='email'],
 			input[type='tel'],
 			input[type='password'],
+			input[type='number'],
 			select,
 			textarea
 		) {

@@ -48,6 +48,7 @@ export const actions = {
                 error: 'Erro ao adicionar programa' + err
             };
         }
+        
         throw redirect(302, '/studio/programs');
         
     }
