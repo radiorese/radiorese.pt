@@ -15,6 +15,7 @@
 
 	import undoIcon from '$lib/icons/undo.svg';
     import forwardIcon from '$lib/icons/forward.svg';
+	import editIcon from '$lib/icons/edit.svg';
 
 	function handleRowClick(episodeNumber) {
 		goto(`/studio/programs/${program.id}/${episodeNumber}`);

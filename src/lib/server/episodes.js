@@ -22,3 +22,13 @@ export async function fetchEpisodeByNumber(programId, episodeNumber) {
         console.error('Error loading episodeById:', err);
     }
 }
+
+export async function isEpisodeCuratedByUser(userId, programId, episodeNumber) {
+    try {
+        let result = await db.query('SELECT * FROM episode_curator WHERE member_account_id = $1 AND episode_program_id = $2 AND episode_number = $3', [userId, programId, episodeNumber]);
+        return result.rowCount > 0;
+        
+    } catch (err) {
+        console.error('Error loading episodeById:', err);
+    }
+}

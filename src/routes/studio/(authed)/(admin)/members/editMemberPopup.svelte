@@ -40,12 +40,17 @@
 		</div>
 		<label>
             {#if isEditing}
-                <h3 class="cMain4">Está ativo?</h3>
+                <h3 class="cMain4"><b class="bold cRed">·</b> Está ativo?</h3>
                 <input name="isActive" type="checkbox" bind:checked={selectedMember.isactive} readonly={!isEditing} />
             {/if}
 		</label>
 		<label>
-			<h3 class="cMain4">Nome</h3>
+			<h3 class="cMain4">
+				{#if isEditing}
+					<b class="bold cRed">·</b>
+				{/if}
+				Nome
+			</h3>
 			<input
 				name="name"
 				type="text"
@@ -56,7 +61,12 @@
 			/>
 		</label>
 		<label>
-			<h3 class="cMain4">@</h3>
+			<h3 class="cMain4">
+				{#if isEditing}
+					<b class="bold cRed">·</b>
+				{/if}
+				@
+			</h3>
 			<input
 				name="at"
 				type="text"
@@ -67,7 +77,12 @@
 			/>
 		</label>
 		<label>
-			<h3 class="cMain4">Email</h3>
+			<h3 class="cMain4">
+				{#if isEditing}
+					<b class="bold cRed">·</b>
+				{/if}
+				Email
+			</h3>
 			<input
 				name="email"
 				type="email"
@@ -83,7 +98,12 @@
             {/if}
 		</label>
 		<label>
-			<h3 class="cMain4">Telemóvel</h3>
+			<h3 class="cMain4">
+				{#if isEditing}
+					<b class="bold cRed">·</b>
+				{/if}
+				Telemóvel
+			</h3>
 			<input
 				name="phone"
 				type="tel"

@@ -14,11 +14,11 @@
 		<h1 class="tSize3">Adicionar Membro</h1>
 		<p class="mBottom-xl cMain5">Cria um novo membro preenchendo todos os campos.</p>
 		<label>
-			<h3 class="cMain4">Está ativo?</h3>
+			<h3 class="cMain4"><b class="bold cRed">·</b> Está ativo?</h3>
 			<input name="isActive" type="checkbox" bind:checked={isActive} />
 		</label>
 		<label>
-			<h3 class="cMain4">Nome</h3>
+			<h3 class="cMain4"><b class="bold cRed">·</b> Nome</h3>
 			<input
 				name="name"
 				type="text"
@@ -28,7 +28,7 @@
 			/>
 		</label>
 		<label>
-			<h3 class="cMain4">@</h3>
+			<h3 class="cMain4"><b class="bold cRed">·</b> @</h3>
 			<input
 				name="at"
 				type="text"
@@ -38,7 +38,7 @@
 			/>
 		</label>
 		<label>
-			<h3 class="cMain4">Email</h3>
+			<h3 class="cMain4"><b class="bold cRed">·</b> Email</h3>
 			<input
 				name="email"
 				type="email"
@@ -48,7 +48,7 @@
 			/>
 		</label>
 		<label>
-			<h3 class="cMain4">Telemóvel</h3>
+			<h3 class="cMain4"><b class="bold cRed">·</b> Telemóvel</h3>
 			<input
 				name="phone"
 				type="tel"

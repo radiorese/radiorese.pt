@@ -47,7 +47,7 @@
 	}
 
 	:global(button) {
-		font-family: 'ApfelGrotezkRegular', serif; /* Ensure font-family is in quotes */
+		font-family: 'ApfelGrotezkRegular', sans; /* Ensure font-family is in quotes */
 		background-color: transparent;
 		border: none;
 		color: var(--main1);
@@ -116,7 +116,7 @@
 			option,
 			textarea
 		) {
-		font-family: 'ApfelGrotezkRegular', serif;
+		font-family: 'ApfelGrotezkRegular', sans;
 		color: var(--main1);
 		text-decoration: none;
 		font-size: 1rem;
@@ -152,7 +152,7 @@
 	}
 
 	:global(.bold) {
-		font-family: 'ApfelGrotezkBold', serif;
+		font-family: 'ApfelGrotezkBold', sans;
 	}
 
 	:global(.glassMorphic) {

@@ -51,6 +51,7 @@ export async function load({ params, locals }) {
         const fileLink = data.get('fileLink');
         const streamingLink = data.get('streamingLink');
         const isAvailableLocally = false;
+        const duration = data.get('duration');
         
         const curators = JSON.parse(data.get('curators'));
 
@@ -61,7 +62,7 @@ export async function load({ params, locals }) {
         }
 
         try {
-            await db.query('INSERT INTO episode (program_id, number, title, synopsis, filelink, streaminglink, isavailablelocally) VALUES ($1, $2, $3, $4, $5, $6, $7)', [programId, number, title, synopsis, fileLink, streamingLink, isAvailableLocally]);
+            await db.query('INSERT INTO episode (program_id, number, title, synopsis, filelink, streaminglink, isavailablelocally, duration) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [programId, number, title, synopsis, fileLink, streamingLink, isAvailableLocally, duration]);
             curators.forEach(async curator => {
                 await db.query('INSERT INTO episode_curator (episode_number, episode_program_id, member_account_id) VALUES ($1, $2, $3)', [number, programId, curator]);
             });

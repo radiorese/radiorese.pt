@@ -19,6 +19,10 @@
 
     import undoIcon from '$lib/icons/undo.svg';
     import deleteIcon from '$lib/icons/delete.svg';
+
+	let hours = $state(0);
+	let minutes = $state(0);
+	let seconds = $state(0);
     
     
 </script>
@@ -30,7 +34,7 @@
 	<a class="iconSize2" href="/studio/programs/{program.id}">
 		<img class="iconSize2" src={undoIcon} alt="Undo Icon" />
 	</a>
-	<h1 class="tSize3">Novo Episódio <b class="tSize3 cMain1">( {program.title} )</b></h1>
+	<h1 class="tSize3">Novo Episódio <b class="cMain3">({program.title})</b></h1>
 </div>
 
 {#if form?.error}
@@ -51,6 +55,20 @@
 			<h3 class="mTop-xl"><b class="bold cRed">·</b> Título do Episódio</h3>
 			<input type="text" id="title" name="title" class="solidBorder bRadius1" required />
 		</label>
+		
+		<label for="duration" id="duration">
+			<input type="hidden" name="duration" value={hours * 3600 + minutes * 60 + seconds} />
+			<h3 class="mTop-xl"><b class="bold cRed">·</b> Duração (com precisão ao segundo)</h3>
+			<div>
+				<input type="number" id="hours" class="solidBorder bRadius1" bind:value={hours} required />
+				<p class="cMain3">hrs</p>
+				<input type="number" id="minutes" class="solidBorder bRadius1" bind:value={minutes} required />
+				<p class="cMain3">min</p>
+				<input type="number" id="seconds" class="solidBorder bRadius1" bind:value={seconds} required />
+				<p class="cMain3">seg</p>
+			</div>
+		</label>
+
 		<label for="synopsis">
 			<h3 class="mTop-xl">Sinopse</h3>
 			<textarea id="synopsis" name="synopsis" class="bRadius1"></textarea>
@@ -165,6 +183,15 @@
                 background-color: var(--secondary);
                 margin-top: 2.618em;
             }
+
+			#duration > div {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+				> input {
+					width: 6rem;
+				}
+			}
 		}
 		@media (max-width: 900px) {
 			> div {

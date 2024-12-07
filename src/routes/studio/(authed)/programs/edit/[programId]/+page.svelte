@@ -1,13 +1,21 @@
 <script>
 	let { data } = $props();
 
+	console.log(data.program);
+
 	let allMembers = data.allMembers;
 	let activeMembers = data.activeMembers;
 
-	let numberOfCreators = $state(1);
+	let program = data.program;
+
+	const mediaType = $state(program.mediatype);
+	let title = $state(program.title);
+	let synopsis = $state(program.synopsis);
+
+	let numberOfCreators = $state(program.creators.length);
 	let creators = $state([]);
 
-	let numberOfCurators = $state(1);
+	let numberOfCurators = $state(program.curators.length);
 	let curators = $state([]);
 
 	import undoIcon from '$lib/icons/undo.svg';
@@ -15,28 +23,30 @@
 </script>
 
 <div id="titleDiv" class="mBottom-xl">
-	<a class="iconSize2" href="/studio/programs">
+	<a class="iconSize2" href="/studio/programs/{program.id}">
 		<img class="iconSize2" src={undoIcon} alt="Undo Icon" />
 	</a>
-	<h1 class="tSize3">Novo Programa</h1>
+	<h1 class="tSize3">{title}</h1>
 </div>
 
-<form method="POST" action="?/addProgram">
+<form method="POST" action="?/editProgram">
+	<input type="hidden" name="id" value={program.id} />
+
 	<div class="mTop-xl bRadius1">
 		<label for="mediaType">
 			<h3><b class="bold cRed">·</b> Tipo de Mídia</h3>
 			<select id="mediaType" name="mediaType" class="bRadius1" required>
-				<option value="music">Música</option>
-				<option value="podcast">Rubrica</option>
+				<option selected={mediaType == 'music' ? true : undefined} value="music">Música</option>
+				<option selected={mediaType == 'podcast' ? true : undefined} value="podcast">Rubrica</option>
 			</select>
 		</label>
 		<label for="title">
 			<h3 class="mTop-xl"><b class="bold cRed">·</b> Título</h3>
-			<input type="text" id="title" name="title" class="solidBorder bRadius1" required />
+			<input type="text" id="title" name="title" class="solidBorder bRadius1" bind:value={title} required />
 		</label>
 		<label for="sinopsis">
 			<h3 class="mTop-xl">Sinopse</h3>
-			<textarea id="sinopsis" name="synopsis" class="bRadius1"></textarea>
+			<textarea id="sinopsis" name="synopsis" class="bRadius1" bind:value={synopsis}></textarea>
 		</label>
 	</div>
 
@@ -52,7 +62,10 @@
 					<select id="creators{index}" bind:value={creators[index]} class="bRadius1" required>
 						{#each allMembers as member}
 							{#if !creators.slice(0, index).includes(member.account_id)}
-								<option value={member.account_id}>{member.name}</option>
+								<option 
+									selected={program.curators[index] == member.name ? true : undefined}
+									value={member.account_id}>{member.name}
+								</option>
 							{/if}
 						{/each}
 					</select>
@@ -85,7 +98,10 @@
 					<select id="curators{index}" bind:value={curators[index]} class="bRadius1" required>
 						{#each activeMembers as member}
 							{#if !curators.slice(0, index).includes(member.account_id)}
-								<option value={member.account_id}>{member.name}</option>
+								<option 
+									selected={program.curators[index] == member.name ? true : undefined}
+									value={member.account_id}>{member.name}
+								</option>
 							{/if}
 						{/each}
 					</select>
@@ -113,7 +129,7 @@
 		</label>
 	</div>
 
-	<button type="submit" class="bRadius1 mTop-xl">Criar Programa</button>
+	<button type="submit" class="bRadius1 mTop-xl">Editar Programa</button>
 </form>
 
 <style>
