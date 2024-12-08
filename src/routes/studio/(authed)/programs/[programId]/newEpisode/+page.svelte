@@ -61,7 +61,7 @@
 			<h3 class="mTop-xl"><b class="bold cRed">·</b> Duração (com precisão ao segundo)</h3>
 			<div>
 				<input type="number" id="hours" class="solidBorder bRadius1" bind:value={hours} required />
-				<p class="cMain3">hrs</p>
+				<p class="cMain3">hr</p>
 				<input type="number" id="minutes" class="solidBorder bRadius1" bind:value={minutes} required />
 				<p class="cMain3">min</p>
 				<input type="number" id="seconds" class="solidBorder bRadius1" bind:value={seconds} required />
