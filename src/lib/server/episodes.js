@@ -23,6 +23,23 @@ export async function fetchEpisodeByNumber(programId, episodeNumber) {
     }
 }
 
+export async function fetchAllEpisodes() {
+    try {
+        let episodes = await db.query(`
+            SELECT e.*, row_to_json(p.*) as program
+            FROM episode e
+            JOIN program p ON e.program_id = p.id
+        `);
+
+        console.log('episodes:', episodes.rows);
+
+        return episodes.rows;
+        
+    } catch (err) {
+        console.error('Error loading episodes:', err);
+    }
+}
+
 export async function isEpisodeCuratedByUser(userId, programId, episodeNumber) {
     try {
         let result = await db.query('SELECT * FROM episode_curator WHERE member_account_id = $1 AND episode_program_id = $2 AND episode_number = $3', [userId, programId, episodeNumber]);

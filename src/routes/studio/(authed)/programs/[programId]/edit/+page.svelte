@@ -35,18 +35,19 @@
 		<input type="hidden" name="id" value={program.id}/>
 		<div class="bRadius1">
 			<label for="title">
-				<h3 class="mBottom-m">Title</h3>
+				<h3 class="mBottom-m"><b class="bold cRed">·</b> Título</h3>
 				<input
 					name="title"
 					class="solidBorder bRadius1"
 					type="text"
 					id="title"
 					bind:value={title}
+					required
 				/>
 			</label>
 
 			<label for="synopsis">
-				<h3 class="mBottom-m">Synopsis</h3>
+				<h3 class="mBottom-m">Sinopse</h3>
 				<textarea name="synopsis" class="solidBorder bRadius1" id="synopsis" bind:value={synopsis}
 				></textarea>
 			</label>

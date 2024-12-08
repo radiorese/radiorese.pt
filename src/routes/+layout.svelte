@@ -12,10 +12,13 @@
 		--secondary: rgb(18, 18, 18);
 		--offSecondary: rgb(25, 25, 25);
 
+		--blue: rgb(0, 0, 255);
 		--red: rgb(255, 0, 0);
 		--green: rgb(0, 255, 0);
 
 		--headerHeight: 60px;
+
+		--breakpoint: 900px;
 
 		--globalMargin: 2rem;
 		--doubleGlobalMargin: 4rem;
@@ -156,9 +159,9 @@
 	}
 
 	:global(.glassMorphic) {
-		background: linear-gradient(0deg, rgba(18, 18, 18, 0.6) 0%, rgba(18, 18, 18, 0.6) 100%),
+		background: linear-gradient(0deg, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.8) 100%),
 			linear-gradient(171deg, rgba(255, 255, 255, 0.01) 0.19%, rgba(255, 255, 255, 0) 101.78%);
-		backdrop-filter: blur(37.5px);
+		backdrop-filter: blur(50px);
 	}
 
 	:global(.noBorder) {

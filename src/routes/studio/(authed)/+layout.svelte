@@ -85,7 +85,7 @@
 							<a href={item.path} class="tSize1 cMain3">{item.name}</a>
 						{/if}
 					</div>
-					<p class="cMain5">ctrl + {index + 1}</p>
+					<p class="shortCut cMain5">ctrl + {index + 1}</p>
 				</div>
 			{/each}
 		</div>
@@ -103,6 +103,9 @@
 		justify-content: space-between;
 		align-items: center;
 		height: var(--headerHeight);
+		position: sticky;
+		top: 0;
+		background-color: var(--secondary);
 		div {
 			display: flex;
 			align-items: center;
@@ -135,12 +138,26 @@
 		gap: 4rem;
 		padding: 2rem;
 		border: solid 1px var(--main3);
-		position: relative;
+		position: sticky;
+		top: var(--headerHeight);
+	}
+
+	@media (max-width: 900px) {
+		nav {
+			max-width: calc(100% - (var(--globalMargin)) * 2);
+			height: calc(100svh - var(--headerHeight) - var(--globalMargin));
+			position: absolute;
+			top: var(--headerHeight);
+			left: var(--globalMargin);
+			.shortCut {
+				display: none;
+			}
+		}
 	}
 
 	.closed {
 		position: absolute;
-		left: -700px;
+		left: -110%;
 	}
 
 	#navLinks {
