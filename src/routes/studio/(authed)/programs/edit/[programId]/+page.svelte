@@ -63,7 +63,7 @@
 						{#each allMembers as member}
 							{#if !creators.slice(0, index).includes(member.account_id)}
 								<option 
-									selected={program.curators[index] == member.name ? true : undefined}
+									selected={program.creators[index] == member.name ? true : undefined}
 									value={member.account_id}>{member.name}
 								</option>
 							{/if}
@@ -129,7 +129,7 @@
 		</label>
 	</div>
 
-	<button type="submit" class="bRadius1 mTop-xl">Editar Programa</button>
+	<button type="submit" class="bRadius1 mTop-xl">Guardar Alterações</button>
 </form>
 
 <style>

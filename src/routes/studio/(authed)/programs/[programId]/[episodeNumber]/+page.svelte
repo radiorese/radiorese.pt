@@ -11,6 +11,7 @@
     let streamingEmbedLink = (episode.streaminglink ? episode.streaminglink.replace('open.spotify.com/playlist', 'open.spotify.com/embed/playlist').split('?')[0] : '')
 
     import undoIcon from '$lib/icons/undo.svg';
+    import linkIcon from '$lib/icons/link.svg';
 </script>
 
 <!--title section-->
@@ -25,7 +26,7 @@
 </div>
 
 <!--stakeholders section-->
-<div id="stakeholdersDiv" class="mTop-xl mBottom-xxl">
+<div id="stakeholdersDiv" class="mTop-xl mBottom-l">
     <div>
         <h2 class="tSize1 cMain4 mBottom-s">Curado por</h2>
         <p class="tSize2">
@@ -42,6 +43,14 @@
             {episode.duration % 60} seg
         </p>
     </div>
+</div>
+
+<!--driveLink-->
+<div class="mBottom-xxl" id="driveLink">
+    <a href={episode.filelink} target="_blank" class="tSize2">
+        <img src={linkIcon} alt="Link" class="iconSize1" />
+        <h2 class="tSize2 cMain3">Google Drive</h2>
+    </a>
 </div>
 
 <!--synopsis-->
@@ -69,6 +78,13 @@
 		gap: 2rem;
 	}
 
+    #driveLink{
+        a {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+        }
+    }
 	#synopsis{
 		max-width: 40ch;
 	}

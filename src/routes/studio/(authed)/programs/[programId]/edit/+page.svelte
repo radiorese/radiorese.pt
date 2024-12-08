@@ -52,7 +52,7 @@
 			</label>
 		</div>
 
-		<button class="whiteButton mTop-xl" type="submit">Save</button>
+		<button class="whiteButton mTop-xl" type="submit">Guardar Alterações</button>
 	</form>
 {/if}
 
