@@ -77,7 +77,7 @@
 			<tr>
 				<th class="cMain4">#</th>
 				<th class="cMain4">Título</th>
-				<th class="cMain4">Curado por</th>
+				<th class="cMain4 hideOnMobile">Curado por</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,7 +86,7 @@
 					<tr class="available" onclick={handleRowClick(episode.number)}>
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
-						<td>
+						<td class="hideOnMobile">
 							{#each episode.curators as curator, index}
 								{curator}{index < episode.curators.length - 1 ? ', ' : ''}
 							{/each}
@@ -99,7 +99,7 @@
 					<tr>
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
-						<td>
+						<td class="hideOnMobile">
 							{#each episode.curators as curator, index}
 								{curator}{index < episode.curators.length - 1 ? ', ' : ''}
 							{/each}

@@ -151,6 +151,9 @@
 		background: var(--secondary);
 		max-width: 500px;
 		width: 100%;
+		width: calc(100% - (var(--globalMargin) * 2));
+		max-height: calc(100% - (var(--globalMargin) * 2));
+		overflow: scroll;
 
 		label,
 		button {

@@ -69,8 +69,7 @@
 	<thead>
 		<tr>
 			<th class="cMain4"> </th>
-			<th class="cMain4">Programa</th>
-			<th class="cMain4">Episódio</th>
+			<th class="cMain4">Episódio (Programa)</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -82,8 +81,8 @@
 						onchange={() => toggleUnavailableEpisodeSelection(index, episode)}
 					/>
 				</td>
-				<td>{episode.program.title}</td>
-				<td>{episode.number} - {episode.title}</td>
+				<td>{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
+					<b class="cMain3">{episode.program.title}</b></td>
 				<td>
 					<a aria-label="download" href={getDriveDownloadLink(episode.filelink)} target="_blank">
                         <image src={downloadIcon} class="iconSize1"></image>
@@ -115,7 +114,6 @@
 	<thead>
 		<tr>
 			<th class="cMain4"> </th>
-			<th class="cMain4">Programa</th>
 			<th class="cMain4">Episódio</th>
 		</tr>
 	</thead>
@@ -128,8 +126,8 @@
 						onchange={() => toggleAvailableEpisodeSelection(index, episode)}
 					/>
 				</td>
-				<td>{episode.program.title}</td>
-				<td>{episode.number} - {episode.title}</td>
+				<td>{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
+					<b class="cMain3">{episode.program.title}</b></td>
 				<td>
 					<a aria-label="download" href={getDriveDownloadLink(episode.filelink)} target="_blank">
                         <image src={downloadIcon} class="iconSize1"></image>
@@ -164,12 +162,12 @@
 		tr {
 			border-bottom: 1px solid var(--main3);
 			td:nth-child(1),
-			td:nth-child(4) {
+			td:nth-child(3) {
 				width: 5%;
 			}
 
-			td:nth-child(2), td:nth-child(3) {
-				width: 45%;
+			td:nth-child(2){
+				width: 90%;
 			}
 		}
 

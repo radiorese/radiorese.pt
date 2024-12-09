@@ -30,8 +30,8 @@
 		<tr>
 			<th class="cMain4">Tipo de Mídia</th>
 			<th class="cMain4">Título</th>
-			<th class="cMain4">Curado por</th>
-			<th class="cMain4">Criado por</th>
+			<th class="cMain4 hideOnMobile">Curado por</th>
+			<th class="cMain4 hideOnMobile">Criado por</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,12 +45,12 @@
 					/>
 				</td>
 				<td>{program.title}</td>
-				<td class="cMain2">
+				<td class="cMain2 hideOnMobile">
 					{#each program.curators as curator, index}
 						{curator}{index < program.curators.length - 1 ? ', ' : ''}
 					{/each}
 				</td>
-				<td class="cMain2">
+				<td class="cMain2 hideOnMobile">
 					{#each program.creators as creator, index}
 						{creator}{index < program.creators.length - 1 ? ', ' : ''}
 					{/each}
@@ -93,6 +93,12 @@
 
 		tbody tr {
 			cursor: pointer;
+		}
+
+		@media (max-width: 650px) {
+			.hideOnMobile {
+				display: none;
+			}
 		}
 	}
 

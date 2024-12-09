@@ -69,7 +69,10 @@
 		</button>
 		<h3 class="tSize1">RESE Studio</h3>
 	</div>
-	<h3 class="tSize1">{user.at}</h3>
+	<div>
+		<image src={profileIcon} class="iconSize2" alt="ícone de perfil" />
+		<h3 class="tSize1">{user.at}</h3>
+	</div>
 </header>
 
 <div id="mainDiv">
@@ -85,7 +88,7 @@
 							<a href={item.path} class="tSize1 cMain3">{item.name}</a>
 						{/if}
 					</div>
-					<p class="shortCut cMain5">ctrl + {index + 1}</p>
+					<p class="shortCut cMain5 hideOnMobile">ctrl + {index + 1}</p>
 				</div>
 			{/each}
 		</div>
@@ -146,12 +149,9 @@
 		nav {
 			max-width: calc(100% - (var(--globalMargin)) * 2);
 			height: calc(100svh - var(--headerHeight) - var(--globalMargin));
-			position: absolute;
+			position: fixed; /* Changed from absolute to fixed */
 			top: var(--headerHeight);
 			left: var(--globalMargin);
-			.shortCut {
-				display: none;
-			}
 		}
 	}
 

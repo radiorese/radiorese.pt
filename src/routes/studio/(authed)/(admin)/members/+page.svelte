@@ -79,8 +79,7 @@
 	{#if activeMembers}
 		{#each activeMembers as member}
 			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
-				<p class="mRight-m tSize1">{member.name}</p>
-				<p class="mRight-l cMain4 tSize1">@{member.at}</p>
+				<p class="mRight-m tSize1">{member.name} <b class="cMain4">@{member.at}</b></p>
 				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
@@ -100,8 +99,7 @@
 	{#if inactiveMembers}
 		{#each inactiveMembers as member}
 			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
-				<p class="mRight-m tSize1">{member.name}</p>
-				<p class="mRight-l cMain4 tSize1">@{member.at}</p>
+				<p class="mRight-m tSize1">{member.name} <b class="cMain4">@{member.at}</p>
 				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
@@ -112,12 +110,19 @@
 <style>
 	.memberCard {
 		display: flex;
+		justify-content: space-between;
 		height: 3.5rem;
 		padding-left: 2rem;
 		padding-right: 2rem;
 		
 		background-color: var(--secondary);
 		align-items: center;
+	}
+
+	@media (max-width: 550px) {
+		.memberCard {
+			width: 100%;
+		}
 	}
 
 	.memberCard:hover {

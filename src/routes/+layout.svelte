@@ -26,10 +26,14 @@
 		--globalTransitionTime: 0.25s;
 	}
 
-	@media (max-width: 760px) {
+	@media (max-width: 900px) {
 		:root {
 			--globalMargin: 1rem;
 			--doubleGlobalMargin: 2rem;
+		}
+
+		:global(.hideOnMobile) {
+			display: none;
 		}
 	}
 
@@ -254,6 +258,8 @@
 	}
 
 	/* spacing*/
+
+	
 
 	:global(.spaceBetween) {
 		display: flex;
