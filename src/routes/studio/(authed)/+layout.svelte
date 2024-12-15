@@ -22,7 +22,7 @@
 
 	// Navigation
 	const adminNav = [
-		{ name: 'Horário', path: '/studio/schedule', icon: scheduleIcon },
+		{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
 		{ name: 'Episódios', path: '/studio/episodes', icon: episodesIcon },
 		{ name: 'Membros', path: '/studio/members', icon: membersIcon },
 		{ name: 'Programas', path: '/studio/programs', icon: programsIcon }
@@ -95,7 +95,7 @@
 		<button class="tSize1" on:click={handleLogout}>Log Out</button>
 	</nav>
 
-	<main>
+	<main class={menuOpen ? '' : 'closed'}>
 		<slot></slot>
 	</main>
 </div>
@@ -125,8 +125,15 @@
 	
 	#mainDiv {
 		display: flex;
+		width: 100%;
+
 		main{
-			width:100%;
+			width:calc(100% - (var(--globalMargin)) - 340px - 2.618em);
+			
+		}
+		main.closed{
+			width: 100%;
+			height:100%;
 		}
 	}
 	nav {
@@ -153,9 +160,15 @@
 			top: var(--headerHeight);
 			left: var(--globalMargin);
 		}
+
+		#main{
+			main{
+				width: 100%;
+			}
+		}
 	}
 
-	.closed {
+	nav.closed {
 		position: absolute;
 		left: -110%;
 	}

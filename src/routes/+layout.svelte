@@ -12,9 +12,14 @@
 		--secondary: rgb(18, 18, 18);
 		--offSecondary: rgb(25, 25, 25);
 
-		--blue: rgb(0, 0, 255);
 		--red: rgb(255, 0, 0);
-		--green: rgb(0, 255, 0);
+		--orange: rgb(255,109,0);
+		--yellow: rgb(255, 218, 0);
+		--green: rgb(0, 216, 0);
+		--blue: rgb(0, 0, 255);
+		--magenta: rgb(255, 0, 255);
+		
+		
 
 		--headerHeight: 60px;
 
