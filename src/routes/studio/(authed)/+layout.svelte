@@ -22,7 +22,7 @@
 
 	// Navigation
 	const adminNav = [
-		{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
+		//{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
 		{ name: 'Episódios', path: '/studio/episodes', icon: episodesIcon },
 		{ name: 'Membros', path: '/studio/members', icon: membersIcon },
 		{ name: 'Programas', path: '/studio/programs', icon: programsIcon }
@@ -128,7 +128,7 @@
 		width: 100%;
 
 		main{
-			width:calc(100% - (var(--globalMargin)) - 340px - 2.618em);
+			width:calc(100% - 340px - 2.618em);
 			
 		}
 		main.closed{
