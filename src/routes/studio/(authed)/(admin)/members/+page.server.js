@@ -1,5 +1,6 @@
 import { db } from '$lib/db';
 import { fetchActiveMembers, fetchInactiveMembers } from '$lib/server/members.js';
+import { hashPassword } from '$lib/server/auth.js';
 
 export async function load() {
     try {
@@ -24,6 +25,7 @@ export const actions = {
         const phone = data.get('phone');
         const at = data.get('at');
         const password = Math.random().toString(36).slice(-8);
+        const hashedPassword = await hashPassword(password);
 
         let highestId = await db.query('SELECT MAX(id) FROM account');
         highestId = highestId.rows[0].max || 0;
@@ -49,7 +51,7 @@ export const actions = {
         
         //insert to db
         try {
-            await db.query('INSERT INTO account (id, at, password) VALUES ($1, $2, $3)', [id, at, password]);
+            await db.query('INSERT INTO account (id, at, password) VALUES ($1, $2, $3)', [id, at, hashedPassword]);
             await db.query('INSERT INTO member (name, isactive, account_id, email, phone) VALUES ($1, $2, $3, $4, $5)', [name, isActive, id, email, phone]);
         } catch (err) {
             return {
