@@ -23,6 +23,16 @@ export async function fetchEpisodeByNumber(programId, episodeNumber) {
     }
 }
 
+export async function fetchEpisodeDuration(programId, episodeNumber) {
+    try {
+        let episode = await db.query('SELECT duration FROM episode WHERE program_id = $1 AND number = $2', [programId, episodeNumber]);
+        return episode.rows[0].duration;
+        
+    } catch (err) {
+        console.error('Error loading episodeById:', err);
+    }
+}
+
 export async function fetchAllEpisodes() {
     try {
         let episodes = await db.query(`

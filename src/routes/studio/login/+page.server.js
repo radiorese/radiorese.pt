@@ -2,6 +2,7 @@
 import { db } from '$lib/db.js';
 import { randomBytes } from 'crypto';
 import { deleteExpiredTokens, comparePassword } from '$lib/server/auth';
+import { redirect } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({ request, cookies }) => {
@@ -28,18 +29,19 @@ export const actions = {
 					[user.id, sessionToken, createdAt, expiredAt]
 				);
 
-				cookies.set('sessionToken', sessionToken, {
+				await cookies.set('sessionToken', sessionToken, {
 					httpOnly: true,
 					path: '/',
 					maxAge: 60 * 60 * 24 // 1 day
 				});
 
-				deleteExpiredTokens();
-			
+				await deleteExpiredTokens();
 
 		} catch (err) {
 			console.error('Database error:', err);
 			return { success: false, message: 'Database error' };
 		}
+
+		throw redirect(302, '/studio');
 	}
 };

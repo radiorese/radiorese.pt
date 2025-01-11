@@ -22,7 +22,7 @@
 
 	// Navigation
 	const adminNav = [
-		//{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
+		{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
 		{ name: 'Episódios', path: '/studio/episodes', icon: episodesIcon },
 		{ name: 'Membros', path: '/studio/members', icon: membersIcon },
 		{ name: 'Programas', path: '/studio/programs', icon: programsIcon }

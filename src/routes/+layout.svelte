@@ -126,7 +126,8 @@
 			input[type='number'],
 			select,
 			option,
-			textarea
+			textarea,
+			button
 		) {
 		font-family: 'ApfelGrotezkRegular', sans;
 		color: var(--main1);

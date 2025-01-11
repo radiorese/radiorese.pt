@@ -15,11 +15,6 @@
 
 	import undoIcon from '$lib/icons/undo.svg';
     import forwardIcon from '$lib/icons/forward.svg';
-	import editIcon from '$lib/icons/edit.svg';
-
-	function handleRowClick(episodeNumber) {
-		goto(`/studio/programs/${program.id}/${episodeNumber}`);
-	}
 </script>
 
 {#if !userRole}
@@ -83,7 +78,7 @@
 		<tbody>
 			{#each program.episodes as episode}
 				{#if userRole === 'admin' || userRole === 'programCurator' || episode.curators.includes(user.name)}
-					<tr class="available" onclick={handleRowClick(episode.number)}>
+					<tr class="available" onclick={() => goto(`/studio/programs/${program.id}/${episode.number}`)}>
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
 						<td class="hideOnMobile">

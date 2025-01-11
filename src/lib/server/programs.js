@@ -29,6 +29,18 @@ export async function fetchPrograms() {
                 )
             `, [row.id]);
             row.creators = creators.rows.map(creator => creator.name);
+
+            let episodes = await db.query(`
+                SELECT number 
+                FROM episode 
+                WHERE program_id = $1
+                ORDER BY number
+            `, [row.id]);
+            row.episodes = await Promise.all(
+                episodes.rows.map(async (episode) => {
+                    return await fetchEpisodeByNumber(row.id, episode.number);
+                })
+            );
         }
         return programs;
     } catch (err) {
