@@ -246,6 +246,10 @@
 		color: var(--red);
 	}
 
+	:global(.cYellow) {
+		color: var(--yellow);
+	}
+
 	:global(.cGreen) {
 		color: var(--green);
 	}
@@ -392,5 +396,9 @@
 
 	:global(.mRight-xxxl) {
 		margin-right: 4.236em;
+	}
+
+	:global(hr) {
+		border: 1px solid var(--main5);
 	}
 </style>

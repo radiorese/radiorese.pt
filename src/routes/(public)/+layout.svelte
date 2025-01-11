@@ -7,17 +7,21 @@
 
     let innerWidth = $state();
     let scrollY = $state();
+
+    let currentDate = new Date().toISOString().split('T')[0];
 </script>
 
 <svelte:window bind:innerWidth bind:scrollY />
+
 
 <header class={scrollY > 0 ? "scrolled" : ""}>
     <button onclick={() => goto("/")}><img src={logo} alt="Logo" class="iconSize3" /></button>
     <div>
         <button onclick={() => goto("/")}>Index</button>
-        <button onclick={() => goto("/schedule/")}>Horário</button>
+        <button onclick={() => goto("/schedule/" + currentDate)}>Horário</button>
     </div>
 </header>
+
 
 <main>
     <slot></slot>
@@ -45,12 +49,14 @@
     }
 
     header{
+
+        z-index: 5;
         position: fixed;
         top: 0px;
         width: 100%;
         padding: 0px var(--globalMargin, 0px);
 
-        height: 4rem;
+        height: var(--headerHeight);
         display: flex;
         justify-content: space-between;
         align-items: center;

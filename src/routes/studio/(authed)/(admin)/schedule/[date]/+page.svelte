@@ -1,5 +1,5 @@
 <script>
-	import { formatDateRange, isToday, isThisWeek } from '$lib/utils/dates.js';
+	import { formatDate, isToday, isThisWeek } from '$lib/utils/dates.js';
 
 	let { data } = $props();
 	let mondayDate = data.mondayDate;
@@ -79,7 +79,7 @@
 		<div id="titleDiv">
 			<h1 class="tSize2">Horário Semanal</h1>
 			<h2 class="tSize2 cMain2">
-				{formatDateRange(mondayDate)} - {formatDateRange(
+				{formatDate(mondayDate)} - {formatDate(
 					new Date(mondayDate).setDate(new Date(mondayDate).getDate() + 6)
 				)}
 				{#if thisWeek}
@@ -132,7 +132,7 @@
 						{day.name}
 
 						<b class="cMain3 tSize2">
-							{formatDateRange(
+							{formatDate(
 								new Date(mondayDate).setDate(new Date(mondayDate).getDate() + dayIndex)
 							)}
 						</b>
