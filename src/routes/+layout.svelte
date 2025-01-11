@@ -102,10 +102,7 @@
 	}
 
 	:global(body) {
-		margin-right: var(--globalMargin);
-		margin-left: var(--globalMargin);
-		margin-bottom: var(--globalMargin);
-		margin-top: 0;
+		margin:0;
 	}
 
 	:global(
@@ -184,6 +181,10 @@
 
 	:global(.dashedBorder) {
 		border: 1px dashed var(--main3);
+	}
+
+	:global(.underlined) {
+		text-decoration: underline;
 	}
 
 	:global(.tSize1) {

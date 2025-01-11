@@ -101,6 +101,11 @@
 </div>
 
 <style>
+
+	:global(body) {
+		margin: 0 var(--globalMargin) var(--globalMargin) var(--globalMargin);
+	}
+
 	header {
 		display: flex;
 		justify-content: space-between;
