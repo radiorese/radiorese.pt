@@ -28,7 +28,6 @@
 
 	let dailyNumberOfEpisodes = $state(episodes.map(day => day.length));
 
-
 	function goToPreviousWeek() {
 		let previousWeek = new Date(mondayDate);
 		previousWeek.setDate(previousWeek.getDate() - 7);

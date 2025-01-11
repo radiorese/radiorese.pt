@@ -5,7 +5,7 @@
 	let at = form?.at || '';
 	let password = form?.password || '';
 
-	import logo from '$lib/icons/logo.png';
+	import logo from '$lib/assets/logo.png';
 </script>
 
 <main>

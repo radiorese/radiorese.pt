@@ -1,4 +1,4 @@
-
+import { redirect } from '@sveltejs/kit';
 import { fetchPublicWeeklySchedule, fetchNextScheduleDate, fetchPreviousScheduleDate } from '$lib/server/schedule.js';
 
 export async function load({ params }) {
@@ -13,6 +13,15 @@ export async function load({ params }) {
     let previousScheduleDate = await fetchPreviousScheduleDate(mondayDate);
     let nextScheduleDate = await fetchNextScheduleDate(mondayDate);
     
+    if (weeklySchedule === null) {
+        if (nextScheduleDate !== null) {
+            throw redirect(302, `/schedule/${nextScheduleDate}/`);
+        } else if (previousScheduleDate !== null) {
+            throw redirect(302, `/schedule/${previousScheduleDate}/`);
+        } else {
+            throw redirect(302, '/');
+        }
+    }
     
     return {
         weeklySchedule,

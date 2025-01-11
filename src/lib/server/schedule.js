@@ -1,8 +1,12 @@
 import { db } from '$lib/db';
 
-import { secondsToTimeStamp } from '$lib/utils/dates';
-
 export async function fetchWeeklySchedule(mondayDate) {
+
+    let checkIfWeeklySchedule = await db.query('SELECT * FROM schedule WHERE startingdate = $1', [mondayDate]);
+
+    if (checkIfWeeklySchedule.rows.length === 0) {
+        return null;
+    }
 
     let weeklySchedule = [];
 
@@ -22,6 +26,10 @@ export async function fetchWeeklySchedule(mondayDate) {
 export async function fetchPublicWeeklySchedule(monday) {
 
     let weeklySchedule = await fetchWeeklySchedule(monday);
+
+    if (weeklySchedule === null) {
+        return null;
+    }
 
     weeklySchedule = weeklySchedule.map(day => 
         day.map(episode => ({
