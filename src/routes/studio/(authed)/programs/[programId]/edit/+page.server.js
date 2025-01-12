@@ -12,7 +12,7 @@ export async function load({ params, locals }) {
     let program;
 
     if (!isProgramCurator) {
-        throw redirect(302, '/studio/programs');
+        redirect(302, '/studio/programs');
     } else {
         program = await fetchProgramById(programId);
     }
@@ -44,6 +44,6 @@ export async function load({ params, locals }) {
                 error: 'Erro ao editar programa: ' + err
             };
         }
-        throw redirect(302, '/studio/programs/'+id);
+        redirect(302, '/studio/programs/'+id);
     },
 };

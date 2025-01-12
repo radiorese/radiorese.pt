@@ -43,7 +43,7 @@ export const actions = {
             };
         }
         
-        throw redirect(302, '/studio/programs/' + id);
+        redirect(302, '/studio/programs/' + id);
         
     }
 }

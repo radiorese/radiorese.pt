@@ -18,7 +18,7 @@ export async function load({ params, locals }) {
     let program;
 
     if (!isAdmin && !isProgramCurator) {
-        throw redirect(302, '/studio/programs');
+        redirect(302, '/studio/programs');
     } else {
         program = await fetchProgramById(programId);
     }
@@ -73,7 +73,7 @@ export async function load({ params, locals }) {
             };
         }
         
-        throw redirect(302, '/studio/programs/'+programId);
+        redirect(302, '/studio/programs/'+programId);
         
     }
 }

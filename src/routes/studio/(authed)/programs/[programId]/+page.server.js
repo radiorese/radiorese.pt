@@ -16,7 +16,7 @@ export async function load({ params, locals }) {
     let program;
 
     if (!isAdmin && !isProgramCurator && !isProgramCreator && !isEpisodeCurator) {
-        throw redirect(302, '/studio/programs');
+        redirect(302, '/studio/programs');
     } else {
         program = await fetchProgramById(programId);
     }

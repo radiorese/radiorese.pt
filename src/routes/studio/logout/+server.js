@@ -10,5 +10,5 @@ export async function POST({ cookies }) {
   });
 
   // Redirect to the login page
-  throw redirect(303, '/studio/login');
+  redirect(303, '/studio/login');
 }

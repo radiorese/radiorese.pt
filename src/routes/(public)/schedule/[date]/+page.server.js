@@ -15,11 +15,11 @@ export async function load({ params }) {
     
     if (weeklySchedule === null) {
         if (nextScheduleDate !== null) {
-            throw redirect(302, `/schedule/${nextScheduleDate}/`);
+            redirect(302, `/schedule/${nextScheduleDate}/`);
         } else if (previousScheduleDate !== null) {
-            throw redirect(302, `/schedule/${previousScheduleDate}/`);
+            redirect(302, `/schedule/${previousScheduleDate}/`);
         } else {
-            throw redirect(302, '/');
+            redirect(302, '/');
         }
     }
     

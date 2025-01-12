@@ -42,6 +42,6 @@ export const actions = {
 			return { success: false, message: 'Database error' };
 		}
 
-		throw redirect(302, '/studio');
+		redirect(302, '/studio');
 	}
 };

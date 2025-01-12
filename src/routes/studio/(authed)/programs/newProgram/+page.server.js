@@ -49,7 +49,7 @@ export const actions = {
             };
         }
         
-        throw redirect(302, '/studio/programs');
+        redirect(302, '/studio/programs');
         
     }
 }
