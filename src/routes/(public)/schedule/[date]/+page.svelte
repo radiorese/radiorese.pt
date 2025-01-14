@@ -41,10 +41,10 @@
             </button>
         {/if}
         <div>
-            <h1 class="tSize3 mBottom-s">{weekTitle}
+            <h1 class="tSize4 mBottom-s">{weekTitle}
                 <hr class="underline" />
             </h1>
-            <h2 class="cMain3 tSize1">{formatDate(mondayDate)} - {formatDate(getDateSum(mondayDate, 6))}</h2>
+            <h2 class="cMain3 tSize2">{formatDate(mondayDate)} - {formatDate(getDateSum(mondayDate, 6))}</h2>
         </div>
         {#if nextWeek}
             <button onclick={goToNextWeek} aria-label="Next Week">
@@ -109,7 +109,7 @@
 			.episodeDiv {
 				display: flex;
 				flex-direction: column;
-				gap: 0.15rem;
+				gap: 0.3rem;
 			}
 		}
     }
@@ -120,7 +120,7 @@
         gap:2rem;
         justify-content: center;
         align-items: center;
-        padding: 2rem 0 3rem 0;
+        padding: 2rem 0 1rem 0;
 
         div{
             position:relative;

@@ -5,7 +5,7 @@ export async function fetchWeeklySchedule(mondayDate) {
     let checkIfWeeklySchedule = await db.query('SELECT * FROM schedule WHERE startingdate = $1', [mondayDate]);
 
     if (checkIfWeeklySchedule.rows.length === 0) {
-        return null;
+        return [ [], [], [], [], [], [], []];
     }
 
     let weeklySchedule = [];
@@ -26,8 +26,9 @@ export async function fetchWeeklySchedule(mondayDate) {
 export async function fetchPublicWeeklySchedule(monday) {
 
     let weeklySchedule = await fetchWeeklySchedule(monday);
+    const emptySchedule = [[], [], [], [], [], [], []];
 
-    if (weeklySchedule === null) {
+    if (weeklySchedule === emptySchedule) {
         return null;
     }
 
@@ -56,6 +57,29 @@ export async function fetchPublicWeeklySchedule(monday) {
 
     return weeklySchedule;
 
+}
+
+export async function fetchPublicDaySchedule(date) {
+    const dailySchedule = await db.query('SELECT * FROM episodeschedule WHERE day = $1 ORDER BY startingtime', [date]);
+    const dailyScheduleArray = dailySchedule.rows.map(episode => ({
+        programId: episode.episode_program_id,
+        episodeNumber: episode.episode_number,
+        startingTime: episode.startingtime,
+        endingTime: episode.endingtime
+    }));
+
+    for (const episode of dailyScheduleArray) {
+        const titleResult = await db.query("SELECT title FROM episode WHERE program_id = $1 AND number = $2", [episode.programId, episode.episodeNumber]);
+        episode.title = titleResult.rows[0]?.title || '';
+        const curatorsResult = await db.query("SELECT name FROM member WHERE account_id IN (SELECT member_account_id FROM episode_curator WHERE episode_program_id = $1 AND episode_number = $2)", [episode.programId, episode.episodeNumber]);
+        episode.curators = curatorsResult.rows.map(row => row.name);
+        const mediaTypeResult = await db.query("SELECT mediatype FROM program WHERE id = $1", [episode.programId]);
+        episode.mediaType = mediaTypeResult.rows[0]?.mediatype || '';
+        const programTitleResult = await db.query("SELECT title FROM program WHERE id = $1", [episode.programId]);
+        episode.programTitle = programTitleResult.rows[0]?.title || '';
+    }
+
+    return dailyScheduleArray;
 }
 
 export async function fetchNextScheduleDate(monday) {

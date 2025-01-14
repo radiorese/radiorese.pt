@@ -5,28 +5,69 @@
     import logo from '$lib/assets/logo.png';
 	import { goto } from '$app/navigation';
 
+    import AudioPlayer from './audioPlayer.svelte';
+
     let innerWidth = $state();
     let scrollY = $state();
 
     let currentDate = new Date().toISOString().split('T')[0];
+
+    let { data } = $props();
+
+    let daySchedule = $state(data.daySchedule);
+    let dayScheduleSkimmed = $state(null);
+    
+
+	import { onMount } from 'svelte';
+
+    function filterDaySchedule() {
+        const currentTime = new Date();
+
+        dayScheduleSkimmed = daySchedule.filter(episode => {
+        const [startHour, startMinutes, startSeconds] = episode.startingTime.split(':').map(Number);
+        const [endHour, endMinutes, endSeconds] = episode.endingTime.split(':').map(Number);
+
+        const startTime = new Date();
+        startTime.setHours(startHour, startMinutes, startSeconds);
+
+        const endTime = new Date();
+        endTime.setHours(endHour, endMinutes, endSeconds);
+
+        return startTime <= currentTime && endTime >= currentTime;
+        });
+
+        if (daySchedule.length === 0) {
+        dayScheduleSkimmed = null;
+        }
+    }
+
+    onMount(() => {
+        filterDaySchedule();
+        const interval = setInterval(filterDaySchedule, 3000);
+        return () => clearInterval(interval);
+    });
 </script>
 
 <svelte:window bind:innerWidth bind:scrollY />
 
-
-<header class={scrollY > 0 ? "scrolled" : ""}>
+<!-- Header -->
+<nav class={scrollY > 0 ? "scrolled" : ""}>
     <button onclick={() => goto("/")}><img src={logo} alt="Logo" class="iconSize3" /></button>
     <div>
         <button onclick={() => goto("/")}>Index</button>
         <button onclick={() => goto("/schedule/" + currentDate)}>Horário</button>
     </div>
-</header>
+</nav>
 
 
 <main>
     <slot></slot>
 </main>
 
+<!-- Audio Player -->
+<AudioPlayer daySchedule={dayScheduleSkimmed}/>
+
+<!-- Footer -->
 <footer>
     <img src={innerWidth < 740 ? logoFooterNarrow : logoFooterWide} alt="Logo" class="logo-wide" />
 
@@ -48,7 +89,7 @@
         margin: 0px;
     }
 
-    header{
+    nav{
 
         z-index: 5;
         position: fixed;

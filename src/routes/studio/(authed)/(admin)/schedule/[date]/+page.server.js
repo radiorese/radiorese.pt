@@ -19,11 +19,12 @@ export async function load({ params }) {
     let weeklySchedule = await fetchWeeklySchedule(mondayDate);
 
     weeklySchedule = await weeklySchedule.map(day => 
-        day.map(episode => ({
-            programId: episode.episode_program_id,
-            episodeNumber: episode.episode_number
-        }))
+            day.map(episode => ({
+                programId: episode.episode_program_id,
+                episodeNumber: episode.episode_number
+            }))
     );
+    
     
     return {
         mondayDate,

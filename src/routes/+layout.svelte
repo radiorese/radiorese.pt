@@ -199,6 +199,26 @@
 		font-size: 2rem;
 	}
 
+	:global(.tSize4) {
+		font-size: 2.5rem;
+	}
+
+	:global(.tSize5) {
+		font-size: 3rem;
+	}
+
+	:global(.tSize6) {
+		font-size: 3.5rem;
+	}
+
+	:global(.tSize7) {
+		font-size: 4rem;
+	}
+
+	:global(.tSize8) {
+		font-size: 4.5rem;
+	}
+
 	:global(.iconSize1) {
 		width: 1rem;
 		height: 1rem;
@@ -284,6 +304,11 @@
 		padding: 0.5rem 1rem;
 		border-radius: 1rem;
 		font-size: 1rem;
+	}
+
+	:global(::selection){
+		background-color: var(--blue);
+		color: var(--main1);
 	}
 
 	:global(.mBottom-xs) {
