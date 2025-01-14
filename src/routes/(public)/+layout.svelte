@@ -15,7 +15,7 @@
     let { data } = $props();
 
     let daySchedule = $state(data.daySchedule);
-    let dayScheduleSkimmed = $state(null);
+    let dayScheduleSkimmed = $state([]);
     
 
 	import { onMount } from 'svelte';
@@ -65,7 +65,9 @@
 </main>
 
 <!-- Audio Player -->
-<AudioPlayer daySchedule={dayScheduleSkimmed}/>
+<AudioPlayer daySchedule={dayScheduleSkimmed.length != 0 ? dayScheduleSkimmed : null}/>
+
+<button onclick={console.log(dayScheduleSkimmed)}>Log</button>
 
 <!-- Footer -->
 <footer>

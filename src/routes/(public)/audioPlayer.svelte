@@ -3,6 +3,8 @@
 
     let { daySchedule } = $props();
 
+    console.log(daySchedule);
+
 	let audioPlaying = $state(false);
 	let audioElement = $state();
 

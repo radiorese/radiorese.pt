@@ -11,6 +11,9 @@
 
 	import deleteIcon from '$lib/icons/delete.svg';
 
+	let episodes = $state(data.weeklySchedule);
+	let dailyNumberOfEpisodes = $state(episodes.map(day => day.length));
+
 	let startingHour = $state(10);
 	let startingSeconds = $derived(startingHour * 60 * 60);
 
@@ -24,9 +27,7 @@
 		{ name: 'Domingo', collapsed: true}
 	]);
 
-	let episodes = $state(data.weeklySchedule);
-
-	let dailyNumberOfEpisodes = $state(episodes.map(day => day.length));
+	
 
 	function goToPreviousWeek() {
 		let previousWeek = new Date(mondayDate);
