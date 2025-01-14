@@ -67,8 +67,6 @@
 <!-- Audio Player -->
 <AudioPlayer daySchedule={dayScheduleSkimmed.length != 0 ? dayScheduleSkimmed : null}/>
 
-<button onclick={console.log(dayScheduleSkimmed)}>Log</button>
-
 <!-- Footer -->
 <footer>
     <img src={innerWidth < 740 ? logoFooterNarrow : logoFooterWide} alt="Logo" class="logo-wide" />
@@ -151,6 +149,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 5rem;
 
             div{
 
