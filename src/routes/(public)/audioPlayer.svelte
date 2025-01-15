@@ -74,7 +74,7 @@
         z-index: 2;
         bottom: var(--globalMargin);
         right: var(--globalMargin);
-        width: 20rem;
+        width: 22rem;
         height: 5rem;
         padding: 0 2rem;
 

@@ -16,6 +16,8 @@
 
     let daySchedule = $state(data.daySchedule);
     let dayScheduleSkimmed = $state([]);
+
+    filterDaySchedule();
     
 
 	import { onMount } from 'svelte';
