@@ -9,7 +9,7 @@
 	let strings1 = ["a iniciativa", "a vontade", "a coragem", "a ousadia", "a criatividade", "a inovação", "o impulso", "a proposta", "o movimento"];
 	let strings2 = ["criação", "expressão", "produção", "manifestação", "concepção"];
 
-	let string1 = $state("iniciativa");
+	let string1 = $state("a iniciativa");
 	let string2 = $state("criação");
 
 	onMount(() => {
