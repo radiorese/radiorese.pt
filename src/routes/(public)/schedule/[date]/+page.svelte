@@ -72,7 +72,7 @@
                                 {:else if episode.mediaType == 'podcast'}
                                     <b class="cYellow">Podcast</b>
                                 {/if}
-                                · {episode.endingTime.split(':')[0]}h{episode.endingTime.split(':')[1]}
+                                · {episode.startingTime.split(':')[0]}h{episode.startingTime.split(':')[1]}
                             </h3>
                             <h1 class="bold">{episode.title}</h1>
                             <h2>{episode.programTitle}</h2>
