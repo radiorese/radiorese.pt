@@ -39,7 +39,7 @@
         });
 
         if (daySchedule.length === 0) {
-        dayScheduleSkimmed = null;
+        dayScheduleSkimmed = [];
         }
     }
 
