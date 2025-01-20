@@ -64,7 +64,7 @@
 
 <header>
 	<div>
-		<button on:click={toggleMenu}>
+		<button class="iconSize2" on:click={toggleMenu}>
 			<img src={sidebarIcon} class="iconSize2" alt="ícone da sidebar" />
 		</button>
 		<h3 class="tSize1">RESE Studio</h3>

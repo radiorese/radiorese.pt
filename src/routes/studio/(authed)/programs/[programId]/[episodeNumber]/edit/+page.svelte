@@ -4,9 +4,11 @@
     let program = data.program;
     let episode = data.episode;
 
+	
+
     let userRole = data.userRole;
 
-    console.log(program);
+    console.log(episode);
 
     let members = data.members;
 
@@ -16,6 +18,8 @@
     import deleteIcon from '$lib/icons/delete.svg';
 
     let number = $state(episode.number);
+
+	let numberBeforeChange = $state(episode.number);
 
     let title = $state(episode.title);
 
@@ -57,6 +61,8 @@
 
     <!--episode table input section-->
     <div class="mTop-xl bRadius1">
+		<input type="hidden" name="numberBeforeChange" value={numberBeforeChange}>
+		<input type="hidden" name="isAvailableLocally" value={episode.isavailablelocally} />
         <input type="hidden" name="programId" value={program.id} />
 		<label for="number">
 			<h3><b class="bold cRed">·</b> Número do Episódio</h3>
