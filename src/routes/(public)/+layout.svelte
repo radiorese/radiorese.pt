@@ -35,7 +35,7 @@
         const endTime = new Date();
         endTime.setHours(endHour, endMinutes, endSeconds);
 
-        return startTime <= currentTime && endTime >= currentTime;
+        return endTime >= currentTime;
         });
 
         if (daySchedule.length === 0) {

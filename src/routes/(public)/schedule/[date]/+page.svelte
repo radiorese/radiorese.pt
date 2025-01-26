@@ -74,7 +74,7 @@
                                 {/if}
                                 · {episode.startingTime.split(':')[0]}h{episode.startingTime.split(':')[1]}
                             </h3>
-                            <h1 class="bold">{episode.title}</h1>
+                            <h1 class="bold"> {episode.title} <b class="cMain3">#{episode.episodeNumber}</b></h1>
                             <h2>{episode.programTitle}</h2>
                             
                             <h3 class="cMain3">

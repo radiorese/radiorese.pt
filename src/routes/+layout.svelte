@@ -219,6 +219,20 @@
 		font-size: 4.5rem;
 	}
 
+	@media (max-width: 900px) {
+		:global(.tSize4) {
+			font-size: 2rem;
+		}
+
+		:global(.tSize5) {
+			font-size: 2rem;
+		}
+
+		:global(.tSize6) {
+			font-size: 2rem;
+		}
+	}
+
 	:global(.iconSize1) {
 		width: 1rem;
 		height: 1rem;
@@ -426,4 +440,6 @@
 	:global(hr) {
 		border: 1px solid var(--main5);
 	}
+
+
 </style>
