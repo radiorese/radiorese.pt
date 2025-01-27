@@ -149,7 +149,7 @@
                     </div>
                 {/each}
 
-                <p class="mBottom-xxl">Vê o resto do horário <a class="underlined" href="/schedule/">aqui</a></p>
+                <p class="mBottom-xxl cMain3">Vê o resto do horário <a class="underlined cMain3" href="/schedule/">aqui</a></p>
 
             </div>
         {/if}

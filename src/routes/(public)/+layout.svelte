@@ -26,20 +26,33 @@
         const currentTime = new Date();
 
         dayScheduleSkimmed = daySchedule.filter(episode => {
-        const [startHour, startMinutes, startSeconds] = episode.startingTime.split(':').map(Number);
-        const [endHour, endMinutes, endSeconds] = episode.endingTime.split(':').map(Number);
+            const [startHour, startMinutes, startSeconds] = episode.startingTime.split(':').map(Number);
+            const [endHour, endMinutes, endSeconds] = episode.endingTime.split(':').map(Number);
 
-        const startTime = new Date();
-        startTime.setHours(startHour, startMinutes, startSeconds);
+            const startTime = new Date();
+            startTime.setHours(startHour, startMinutes, startSeconds);
 
-        const endTime = new Date();
-        endTime.setHours(endHour, endMinutes, endSeconds);
+            const endTime = new Date();
+            endTime.setHours(endHour, endMinutes, endSeconds);
 
-        return endTime >= currentTime;
+            return endTime >= currentTime;
         });
 
-        if (daySchedule.length === 0) {
-        dayScheduleSkimmed = [];
+        const isEpisodeRunning = daySchedule.some(episode => {
+            const [startHour, startMinutes, startSeconds] = episode.startingTime.split(':').map(Number);
+            const [endHour, endMinutes, endSeconds] = episode.endingTime.split(':').map(Number);
+
+            const startTime = new Date();
+            startTime.setHours(startHour, startMinutes, startSeconds);
+
+            const endTime = new Date();
+            endTime.setHours(endHour, endMinutes, endSeconds);
+
+            return startTime <= currentTime && endTime >= currentTime;
+        });
+
+        if (daySchedule.length === 0 || !isEpisodeRunning) {
+            dayScheduleSkimmed = [];
         }
     }
 
