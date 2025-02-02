@@ -156,7 +156,7 @@
 									onchange={(event) => {
 										episodes[dayIndex][episodeIndex] = {
 											programId: event.target.value,
-											episodeNumber: null
+											episodeNumber: null,
 										};
 									}}
 								>
@@ -177,9 +177,12 @@
 										required
 										onchange={(event) => {
 											episodes[dayIndex][episodeIndex].episodeNumber = event.target.value;
-										}}
+										}
+										}
 									>
-										<option value="" disabled selected>Episódio</option>
+										<option value="" disabled 
+											selected={!episodes[dayIndex][episodeIndex]?.episodeNumber}
+										>Episódio</option>
 										{#each programs.find(p => p.id == episodes[dayIndex][episodeIndex].programId).episodes as ep}
 											<option
 												id={"d"+dayIndex+"i"+episodeIndex+"p"+ep.program_id+"e"+ep.number}
