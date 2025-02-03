@@ -161,6 +161,12 @@
 		background-color: var(--offSecondary);
 	}
 
+	:global(input[type='checkbox']) {
+		width: 1rem;
+		height: 1rem;
+		color: var(--secondary);
+	}
+
 	:global(.bold) {
 		font-family: 'ApfelGrotezkBold', sans;
 	}

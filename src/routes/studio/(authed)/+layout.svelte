@@ -23,8 +23,8 @@
 	// Navigation
 	const adminNav = [
 		{ name: 'Horário', path: `/studio/schedule/${data.currentDate}`, icon: scheduleIcon },
-		{ name: 'Episódios', path: '/studio/episodes', icon: episodesIcon },
-		{ name: 'Membros', path: '/studio/members', icon: membersIcon },
+		{ name: `Episódios ${data.episodesToDownload == true ? " <b class='bold cRed'>•</b> " : ""}`, path: '/studio/episodes', icon: episodesIcon },
+		{ name: 'Membros' , path: '/studio/members', icon: membersIcon },
 		{ name: 'Programas', path: '/studio/programs', icon: programsIcon }
 	];
 
@@ -83,9 +83,9 @@
 					<div>
 						<img src={item.icon} class="iconSize2" alt="ícone de {item.name}" />
 						{#if item.path === $page.url.pathname}
-							<a href={item.path} class="tSize1">{item.name}</a>
+							<a href={item.path} class="tSize1">{@html item.name}</a>
 						{:else}
-							<a href={item.path} class="tSize1 cMain3">{item.name}</a>
+							<a href={item.path} class="tSize1 cMain3">{@html item.name}</a>
 						{/if}
 					</div>
 					<p class="shortCut cMain5 hideOnMobile">ctrl + {index + 1}</p>

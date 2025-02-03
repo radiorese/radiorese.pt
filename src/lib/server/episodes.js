@@ -59,3 +59,17 @@ export async function isEpisodeCuratedByUser(userId, programId, episodeNumber) {
         console.error('Error loading episodeById:', err);
     }
 }
+
+export async function anyEpisodeNotAvailableLocally() { 
+    try {
+        let result = await db.query('SELECT * FROM episode WHERE isavailablelocally = false');
+        if( result.rowCount > 0) { 
+            console.log('@@@')
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.error('Error loading episodeById:', err);
+    }
+}

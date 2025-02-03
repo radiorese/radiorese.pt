@@ -38,8 +38,14 @@
 		{
 			name: "Instagram",
 			link: "https://www.instagram.com/radiorese.pt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-			margin: 0.9,
+			margin: 1,
 			shape: shape1
+		},
+		{
+			name: "Pede um disco!",
+			link: "https://docs.google.com/forms/d/e/1FAIpQLSdUM99BjEeNU_acdq8Gbkcs_0mB4XBbxGEVMcPXXOcXq4lLfA/viewform?usp=header",
+			margin: 0.6,
+			shape: shape2
 		}
 	]
 </script>
