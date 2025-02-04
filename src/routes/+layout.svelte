@@ -1,3 +1,11 @@
+<script>
+	import favicon from '$lib/assets/blueDot.ico';
+</script>
+
+<svelte:head>
+	<link rel="icon" href={favicon}>
+</svelte:head>
+
 <slot />
 
 <style>

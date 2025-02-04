@@ -58,9 +58,16 @@
 			toggleMenu();
 		}
 	}
+
+	import favicon from '$lib/assets/redDot.ico';
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
+
+<svelte:head>
+	<link rel="icon" href={favicon}>
+	<title>RESE Studio</title>
+</svelte:head>
 
 <header>
 	<div>
