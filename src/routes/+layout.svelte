@@ -107,6 +107,7 @@
 	:global(html) {
 		font-size: 100%;
 		background-color: var(--secondary);
+		scroll-behavior: smooth;
 	}
 
 	:global(body) {

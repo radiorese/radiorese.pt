@@ -36,8 +36,8 @@
 			shape: shape4
 		},
 		{
-			name: "Instagram",
-			link: "https://www.instagram.com/radiorese.pt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+			name: "Junta-te a nós!",
+			link: "https://docs.google.com/forms/d/e/1FAIpQLScWiuayfcOYaUwdCg_aKX3fRcnvpYCRnsukykHMK1G59V8I6A/viewform?usp=sf_link",
 			margin: 1,
 			shape: shape1
 		},
