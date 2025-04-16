@@ -36,12 +36,6 @@
 			shape: shape4
 		},
 		{
-			name: "Junta-te a nós!",
-			link: "https://docs.google.com/forms/d/e/1FAIpQLScWiuayfcOYaUwdCg_aKX3fRcnvpYCRnsukykHMK1G59V8I6A/viewform?usp=sf_link",
-			margin: 1,
-			shape: shape1
-		},
-		{
 			name: "Pede um disco!",
 			link: "https://docs.google.com/forms/d/e/1FAIpQLSdUM99BjEeNU_acdq8Gbkcs_0mB4XBbxGEVMcPXXOcXq4lLfA/viewform?usp=header",
 			margin: 0.6,
