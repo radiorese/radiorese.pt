@@ -14,7 +14,7 @@
 	let episodes = $state(data.weeklySchedule);
 	let dailyNumberOfEpisodes = $state(episodes.map(day => day.length));
 
-	let startingHour = $state(10);
+	let startingHour = $state(9);
 	let startingSeconds = $derived(startingHour * 60 * 60);
 
 	let days = $state([
