@@ -16,15 +16,46 @@ export async function load({ params }) {
 
     const allPrograms = await fetchPrograms();
 
-    let weeklySchedule = await fetchWeeklySchedule(mondayDate);
+    for (const program of allPrograms) {
+        let totalAppearances = 0;
+        let maxAppearances = 0;
+        let minAppearances = Infinity;
+        
+        for (const episode of program.episodes) {
+            const previousAppearances = await db.query(`
+                SELECT COUNT(*) 
+                FROM episodeschedule 
+                WHERE episode_program_id = $1 
+                AND episode_number = $2 
+                AND day < $3
+            `, [program.id, episode.number, mondayDate]);
+            episode.previousAppearances = parseInt(previousAppearances.rows[0]?.count || 0);
+            
+            totalAppearances += episode.previousAppearances;
+            
+            if (episode.previousAppearances > maxAppearances) {
+                maxAppearances = episode.previousAppearances;
+            }
+            
+            if (episode.previousAppearances < minAppearances) {
+                minAppearances = episode.previousAppearances;
+            }
+        }
+        
+        program.avgAppearances = program.episodes.length > 0 
+            ? totalAppearances / program.episodes.length 
+            : 0;
+        program.maxAppearances = maxAppearances;
+        program.minAppearances = program.episodes.length > 0 ? minAppearances : 0;
+    }
 
+    let weeklySchedule = await fetchWeeklySchedule(mondayDate);
     weeklySchedule = await weeklySchedule.map(day => 
             day.map(episode => ({
                 programId: episode.episode_program_id,
                 episodeNumber: episode.episode_number
             }))
     );
-    
     
     return {
         mondayDate,

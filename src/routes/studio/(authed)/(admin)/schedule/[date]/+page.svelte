@@ -166,7 +166,17 @@
 											id={"d"+dayIndex+"i"+episodeIndex+"p"+program.id}
 											value={program.id}
 											selected={episodes[dayIndex][episodeIndex]?.programId == program.id}
-										>{program.title}</option>
+										> 
+											{(() => {
+												const t = program.title ?? '';
+												if (t.length <= 35) return t;
+												let sub = t.slice(0, 30);
+												const idx = sub.lastIndexOf(' ');
+												if (idx > 0) sub = sub.slice(0, idx);
+												return sub + '...';
+											})()}
+											[{Number(program.avgAppearances ?? 0).toFixed(1)}] 
+										</option>
 									{/each}
 								</select>
 							
@@ -184,11 +194,25 @@
 											selected={!episodes[dayIndex][episodeIndex]?.episodeNumber}
 										>Episódio</option>
 										{#each programs.find(p => p.id == episodes[dayIndex][episodeIndex].programId).episodes as ep}
+											{@const program = programs.find(p => p.id == episodes[dayIndex][episodeIndex].programId)}
 											<option
 												id={"d"+dayIndex+"i"+episodeIndex+"p"+ep.program_id+"e"+ep.number}
 												value={ep.number}
 												selected={ep.number == episodes[dayIndex][episodeIndex]?.episodeNumber}
-											>{ep.number}. {ep.title}</option>
+												style="background-color: 
+													{ep.previousAppearances == 0 ? 'var(--red)' 
+													: `hsl(0, 0%, ${25 - Math.cbrt((ep.previousAppearances - program.minAppearances) / (program.maxAppearances - program.minAppearances)) * 15}%)`}
+												"
+											>
+												{#if ep.previousAppearances == 0}
+													[NOVO]
+												{:else}
+													[{ep.previousAppearances}]
+												{/if}
+													#{ep.number} 
+													{ep.title}
+												
+											</option>
 										{/each}
 									</select>
 								{/if}

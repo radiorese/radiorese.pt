@@ -135,7 +135,7 @@
 			textarea,
 			button
 		) {
-		font-family: 'ApfelGrotezkRegular', sans;
+		font-family: 'ApfelGrotezkRegular', sans-serif;
 		color: var(--main1);
 		text-decoration: none;
 		font-size: 1rem;
@@ -162,11 +162,11 @@
 	}
 
 	:global(option) {
-		background-color: var(--secondary);
+		background-color: var(--offSecondary);
 		color: var(--main1);
 	}
 
-	:global(option:hover)	{
+	:global(option:hover){
 		background-color: var(--offSecondary);
 	}
 
