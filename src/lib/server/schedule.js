@@ -29,7 +29,7 @@ export async function fetchPublicWeeklySchedule(monday) {
     const emptySchedule = [[], [], [], [], [], [], []];
 
     if (weeklySchedule === emptySchedule) {
-        return null;
+        return null; 
     }
 
     weeklySchedule = weeklySchedule.map(day => 
@@ -37,11 +37,11 @@ export async function fetchPublicWeeklySchedule(monday) {
             programId: episode.episode_program_id,
             episodeNumber: episode.episode_number,
             startingTime: episode.startingtime,
-            endingTime: episode.endingtime
+            endingTime: episode.endingtime,
+            day: episode.day
         }))
     );
 
-    
     for (const day of weeklySchedule) {
         for (const episode of day) {
             const titleResult = await db.query("SELECT title FROM episode WHERE program_id = $1 AND number = $2", [episode.programId, episode.episodeNumber]);
@@ -52,6 +52,15 @@ export async function fetchPublicWeeklySchedule(monday) {
             episode.mediaType = mediaTypeResult.rows[0]?.mediatype || '';
             const programTitleResult = await db.query("SELECT title FROM program WHERE id = $1", [episode.programId]);
             episode.programTitle = programTitleResult.rows[0]?.title || '';
+            
+            const previousAppearances = await db.query(`
+                SELECT COUNT(*) 
+                FROM episodeschedule 
+                WHERE episode_program_id = $1 
+                AND episode_number = $2 
+                AND day < $3
+            `, [episode.programId, episode.episodeNumber, monday]);
+            episode.debut = parseInt(previousAppearances.rows[0]?.count || 0) === 0;
         }
     }
 

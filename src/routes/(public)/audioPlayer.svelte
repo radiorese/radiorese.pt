@@ -227,7 +227,7 @@
     }
 
     #audioPlayer.open {
-        height: calc(100vh - var(--globalMargin)*2 - var(--headerHeight));
+        height: calc(100svh - var(--headerHeight));
         
         
 

@@ -299,8 +299,24 @@
 		color: var(--yellow);
 	}
 
-	:global(.cGreen) {
-		color: var(--green);
+	:global(.bgGreen) {
+		background-color: var(--green);
+	}
+
+	:global(.bgRed) {
+		background-color: var(--red);
+	}
+
+	:global(.bgYellow) {
+		background-color: var(--yellow);
+	}
+
+	:global(.bgGreen) {
+		background-color: var(--green);
+	}
+
+	:global(.bgBlue) {
+		background-color: var(--blue);
 	}
 
 	/*border radius*/

@@ -62,10 +62,12 @@
                     <div>
                         <h1 class="tSize3 dayTitle">{days[dayIndex]}</h1>
                         <h2 class="cMain3 tSize3">{formatDate(getDateSum(mondayDate, dayIndex))}</h2>
-                        {#if innerWidth < 800} <hr class="mTop-xl"> {/if}
                     </div>
                     {#each day as episode}
-                        <div class="episodeDiv">
+                        <div class="episodeDiv solidBorder bRadius1">
+                            {#if episode.debut}
+                                <h4 class="debutText bgBlue">ESTREIA</h4>
+                            {/if}
                             <h3 class="cMain3 mBottom-s">
                                 {#if episode.mediaType == 'music'}
                                     <b class="cRed">Música</b>
@@ -98,18 +100,29 @@
     #schedule{
         display: flex;
         flex-direction: row;
-        gap: 3rem;
+        gap: 2rem;
 
         .dayDiv {
 			display: flex;
 			flex-direction: column;
-			gap: 2rem;
+			gap: 1.5rem;
             width: 100%;
 
 			.episodeDiv {
 				display: flex;
 				flex-direction: column;
 				gap: 0.3rem;
+                padding: 1rem;
+                border-color: var(--main4);
+                position: relative;
+
+                .debutText {
+                    position: absolute;
+                    top: -0.5rem;
+                    right: -0.5rem;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 0.5rem;
+                }
 			}
 		}
     }

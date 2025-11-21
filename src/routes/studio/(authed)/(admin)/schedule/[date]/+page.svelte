@@ -200,7 +200,7 @@
 												value={ep.number}
 												selected={ep.number == episodes[dayIndex][episodeIndex]?.episodeNumber}
 												style="background-color: 
-													{ep.previousAppearances == 0 ? 'var(--red)' 
+													{ep.previousAppearances == 0 ? 'var(--blue)' 
 													: `hsl(0, 0%, ${25 - Math.cbrt((ep.previousAppearances - program.minAppearances) / (program.maxAppearances - program.minAppearances)) * 15}%)`}
 												"
 											>
