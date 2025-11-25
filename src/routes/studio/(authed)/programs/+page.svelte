@@ -32,9 +32,6 @@
 {#if userIsAdmin}
     <div id="titleDiv">
         <h1 class="tSize3">Programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
-        <a href="/studio/programs/newProgram">
-            <button class="cSecondary tSize2 whiteButton"> Novo Programa </button>
-        </a>
     </div>
 {:else}
     <h1 class="mTop-m tSize3">Os teus programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
@@ -42,7 +39,7 @@
 
 <div id="toolBar" class="mTop-xxl">
 
-    <ToggleGroup.Root type="single" bind:value={selectedValues}>
+    <ToggleGroup.Root class="hideOnMobile" type="single" bind:value={selectedValues}>
     <ToggleGroup.Item value="all">Todos</ToggleGroup.Item>
     <ToggleGroup.Item value="podcast">Rubricas</ToggleGroup.Item>
     <ToggleGroup.Item value="music">Música</ToggleGroup.Item>
@@ -51,27 +48,31 @@
     <input
         class="bRadius0-5"
         type="text"
-        placeholder="Procurar programa..."
+        placeholder="Procurar..."
         bind:value={searchTerm}
     />
+
+    <a href="/studio/programs/newProgram">
+        <button id="newProgram" class="whiteButton">+</button>
+    </a>
 </div>
 
 {#if filteredPrograms.length === 0}
-    <p class="mTop-xxl cMain2">Nenhum programa encontrado.</p>
+    <p class="mTop-xl cMain2">Nenhum programa encontrado.</p>
 {:else}
-    <table class="mTop-m">
+    <table class="mTop-xl">
         <thead>
             <tr>
-                <th class="cMain4">Mídia</th>
-                <th class="cMain4">Título</th>
-                <th class="cMain4 hideOnMobile">Curado por</th>
-                <th class="cMain4 hideOnMobile">Criado por</th>
+                <th class="cMain3">Mídia</th>
+                <th class="cMain3">Título</th>
+                <th class="cMain3 hideOnMobile">Curado por</th>
+                <th class="cMain3 hideOnMobile">Criado por</th>
             </tr>
         </thead>
         
         <tbody>
             {#each filteredPrograms as program}
-                <tr onclick={() => handleRowClick(program.id)}>
+                <tr onclick={() => handleRowClick(program.id)} class="mBottom-s">
                     <td>
                         <img
                             class="iconSize2"
@@ -80,12 +81,12 @@
                         />
                     </td>
                     <td>{program.title}</td>
-                    <td class="cMain2 hideOnMobile">
+                    <td class="cMain3 hideOnMobile">
                         {#each program.curators as curator, index}
                             {curator}{index < program.curators.length - 1 ? ', ' : ''}
                         {/each}
                     </td>
-                    <td class="cMain2 hideOnMobile">
+                    <td class="cMain3 hideOnMobile">
                         {#each program.creators as creator, index}
                             {creator}{index < program.creators.length - 1 ? ', ' : ''}
                         {/each}
@@ -103,6 +104,7 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
+        border: 1px solid var(--main5);
 
 		th,
 		td {
@@ -113,13 +115,13 @@
 			}
 		}
 
-		tr {
-			border-bottom: 1px solid var(--main3);
-		}
+        tbody{
+            border-spacing: 1rem;
+        }
 
-		tbody tr:last-child {
-			border-bottom: none;
-		}
+        tbody tr{
+            border: 1px solid var(--main5);
+        }
 
 		.fowardIcon {
 			transition: var(--globalTransitionTime);
@@ -134,12 +136,6 @@
 		tbody tr {
 			cursor: pointer;
 		}
-
-		@media (max-width: 650px) {
-			.hideOnMobile {
-				display: none;
-			}
-		}
 	}
 
 	#titleDiv {
@@ -150,9 +146,10 @@
 
 	#toolBar {
         display: flex;
-        gap:1rem;
+        gap:0.5rem;
         width: fit-content;
         align-items: center;
+        width: 100%;
 
         input{
             height: 3rem;
@@ -163,6 +160,16 @@
 
         input:focus{
             border:1px solid rgb(161, 161, 161);
+        }
+
+        #newProgram{
+            font-size: 1.3rem;
+            padding: 0px;
+            height: 3rem;
+            width: 3rem;
+            white-space: no-wrap;
+            padding: none;
+            text-align: center;
         }
 
     }

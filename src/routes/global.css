@@ -17,7 +17,17 @@
     color: var(--main4);
 }
 
+[data-toggle-group-item]:hover {
+    background: var(--offSecondary);
+}
+
 [data-toggle-group-item][data-state="on"] {
     background: var(--offSecondary);
     color: var(--main1);
 }
+
+@media (max-width: 900px) {
+			.hideOnMobile {
+				display: none;
+			}
+		}

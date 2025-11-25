@@ -45,10 +45,6 @@
 			--globalMargin: 1rem;
 			--doubleGlobalMargin: 2rem;
 		}
-
-		:global(.hideOnMobile) {
-			display: none;
-		}
 	}
 
 	@font-face {
@@ -358,9 +354,10 @@
 
 	:global(.whiteButton){
 		background-color: var(--main1);
+		white-space: no-wrap;
 		color: var(--secondary);
 		padding: 0.5rem 1rem;
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 		font-size: 1rem;
 	}
 
