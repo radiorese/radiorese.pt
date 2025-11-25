@@ -12,7 +12,7 @@
 
     let currentDate = new Date().toISOString().split('T')[0];
 
-    let { data } = $props();
+    let { data, children } = $props();
 
     let daySchedule = $state(data.daySchedule);
     let dayScheduleSkimmed = $state([]);
@@ -76,7 +76,7 @@
 
 
 <main>
-    <slot></slot>
+    {@render children()}
 </main>
 
 <!-- Audio Player -->

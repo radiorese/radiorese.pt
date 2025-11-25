@@ -1,0 +1,23 @@
+[data-toggle-group-root] {
+ 	width: fit-content;
+    padding: 0.25rem 0.25rem;
+ 	display: flex;
+ 	gap: 0.25rem;
+    background: var(--secondary);
+    border: 1px solid var(--main5);
+    border-radius: 0.5rem;
+    height: 3rem;
+}
+
+[data-toggle-group-item] {
+    padding: 0.5rem 0.75rem;
+ 	border-radius: 0.25rem;
+ 	cursor: pointer;
+    user-select: none;
+    color: var(--main4);
+}
+
+[data-toggle-group-item][data-state="on"] {
+    background: var(--offSecondary);
+    color: var(--main1);
+}

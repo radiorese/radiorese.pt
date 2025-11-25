@@ -1,5 +1,6 @@
 <script>
 	import favicon from '$lib/assets/blueDot.ico';
+	import './global.css';
 </script>
 
 <svelte:head>
@@ -100,6 +101,10 @@
 		margin: 0;
 		font-weight: normal;
 		text-align: left;
+	}
+
+	:global(input[type='text']:focus){
+		outline: 2px solid var(--main);
 	}
 
 	/* global styles */
@@ -320,6 +325,14 @@
 	}
 
 	/*border radius*/
+
+	:global(.bRadius0) {
+		border-radius: 0;
+	}
+
+	:global(.bRadius0-5) {
+		border-radius: 0.5rem;
+	}
 
 	:global(.bRadius1) {
 		border-radius: 1rem;

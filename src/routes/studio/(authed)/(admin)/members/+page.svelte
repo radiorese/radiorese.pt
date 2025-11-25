@@ -79,7 +79,7 @@
 	{#if activeMembers}
 		{#each activeMembers as member}
 			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
-				<p class="mRight-m tSize1">{member.name} <b class="cMain4">@{member.at}</b></p>
+				<p class="mRight-m tSize1">{member.name}</p>
 				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
@@ -99,7 +99,7 @@
 	{#if inactiveMembers}
 		{#each inactiveMembers as member}
 			<button class="memberCard solidBorder bRadius3" on:click={(event) => toggleEditMemberPopup(event, member)}>
-				<p class="mRight-m tSize1">{member.name} <b class="cMain4">@{member.at}</p>
+				<p class="mRight-m tSize1">{member.name}</p>
 				<img class="iconSize1" src={editIcon} alt="editar" />
 			</button>
 		{/each}
