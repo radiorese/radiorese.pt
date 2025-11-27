@@ -37,7 +37,7 @@
     <h1 class="mTop-m tSize3">Os teus programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
 {/if}
 
-<div id="toolBar" class="mTop-xxl">
+<div id="toolBar" class="mTop-xl">
 
     <ToggleGroup.Root class="hideOnMobile" type="single" bind:value={selectedValues}>
     <ToggleGroup.Item value="all">Todos</ToggleGroup.Item>
@@ -52,9 +52,11 @@
         bind:value={searchTerm}
     />
 
-    <a href="/studio/programs/newProgram">
-        <button id="newProgram" class="whiteButton">+</button>
-    </a>
+    {#if userIsAdmin}
+        <a href="/studio/programs/newProgram">
+            <button id="newProgram" class="whiteButton">+</button>
+        </a>
+    {/if}
 </div>
 
 {#if filteredPrograms.length === 0}
