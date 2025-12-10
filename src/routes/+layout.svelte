@@ -331,11 +331,11 @@
 	}
 
 	:global(.bRadius1) {
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 	}
 
 	:global(.bRadius2) {
-		border-radius: 4rem;
+		border-radius: 1rem;
 	}
 
 	:global(.bRadius3) {

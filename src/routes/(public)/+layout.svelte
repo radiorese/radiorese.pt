@@ -91,7 +91,6 @@
             <a href="https://maps.app.goo.gl/ouRKBm4CrsW9v87P9" class="underlined">Google Maps</a>
             <a href="mailto:geral@radiorese.pt" class="underlined">Email</a>
             <a href="https://www.instagram.com/radiorese.pt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="underlined">Instagram</a>
-            <a href="https://github.com/radiorese" class="underlined">Github</a>
         </div>
 
         <p id="credits">Website desenhado <br> e desenvolvido <br> por <a class="underlined">Rafa Silva Arias</a></p>

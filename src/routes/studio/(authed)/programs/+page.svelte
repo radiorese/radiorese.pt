@@ -34,15 +34,15 @@
         <h1 class="tSize3">Programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
     </div>
 {:else}
-    <h1 class="mTop-m tSize3">Os teus programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
+    <h1 class="tSize3">Os teus programas <b class="cMain3 tSize3">({filteredPrograms.length})</b></h1>
 {/if}
 
 <div id="toolBar" class="mTop-xl">
 
     <ToggleGroup.Root class="hideOnMobile" type="single" bind:value={selectedValues}>
-    <ToggleGroup.Item value="all">Todos</ToggleGroup.Item>
-    <ToggleGroup.Item value="podcast">Rubricas</ToggleGroup.Item>
-    <ToggleGroup.Item value="music">Música</ToggleGroup.Item>
+        <ToggleGroup.Item value="all">Todos</ToggleGroup.Item>
+        <ToggleGroup.Item value="podcast">Rubricas</ToggleGroup.Item>
+        <ToggleGroup.Item value="music">Música</ToggleGroup.Item>
     </ToggleGroup.Root>
 
     <input
