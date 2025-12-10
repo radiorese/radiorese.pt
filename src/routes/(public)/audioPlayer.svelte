@@ -19,7 +19,10 @@
 
 	$effect(() => {
 		if (audioPlaying) {
-			audioElement.play();
+			audioElement.play().catch(err => {
+				console.error('Playback failed:', err);
+				audioPlaying = false;
+			});
 		} else {
 			audioElement.pause();
 		}
@@ -29,27 +32,77 @@
 		audioPlaying = !audioPlaying;
 	}
 
+	// Handling audio fetching for smoother live streaming
+
+        function handleAudioError(e) {
+            console.error('Stream error:', e);
+            if (audioPlaying) {
+                setTimeout(() => {
+                    if (audioPlaying) {
+                        audioElement.load();
+                        audioElement.play().catch(err => {
+                            console.error('Reconnection failed:', err);
+                            audioPlaying = false;
+                        });
+                    }
+                }, 3000);
+            }
+        }
+
+        function handleTimeUpdate() {
+            if (audioElement.buffered.length > 0) {
+                const bufferEnd = audioElement.buffered.end(audioElement.buffered.length - 1);
+                const currentTime = audioElement.currentTime;
+                if (bufferEnd - currentTime > 10) {
+                    audioElement.currentTime = bufferEnd - 1;
+                }
+            }
+        }
+
+        let keepAliveInterval;
+        onMount(() => {
+            keepAliveInterval = setInterval(() => {
+                if (audioPlaying && audioElement.paused) {
+                    console.log('Stream stalled, attempting recovery...');
+                    audioElement.load();
+                    audioElement.play().catch(err => {
+                        console.error('Recovery failed:', err);
+                    });
+                }
+            }, 5000);
+
+            return () => {
+                if (keepAliveInterval) clearInterval(keepAliveInterval);
+            };
+        });
+
+    //
+
     let sliderContainerWidth = $state();
     let infoWidth = $state([]);
     let infoOffset = $state([]);
     let frame = 0;
 
     onMount(() => {
-        
         const interval = setInterval(() => {
             for (let i = 0; i < 3; i++) {
                 infoOffset[i] = ((sliderContainerWidth - infoWidth[i]) * ((Math.cos(frame/360))) - (sliderContainerWidth - infoWidth[i])) / 2;
             }
             frame++;
         }, 5);
+
+		return () => clearInterval(interval);
     });
-
-
 </script>
 
 <svelte:window bind:innerWidth />
 
-<audio bind:this={audioElement}>
+<audio 
+	bind:this={audioElement}
+	preload="none"
+	onerror={handleAudioError}
+	ontimeupdate={handleTimeUpdate}
+>
 	<source
 		src="https://live.radiorese.pt/stream"
 		type="audio/mpeg"
