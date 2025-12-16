@@ -10,8 +10,8 @@ export async function load({ params }) {
     const mondayDate = new Date(date.setDate(diff)).toISOString().split('T')[0];
 
     let weeklySchedule = await fetchPublicWeeklySchedule(mondayDate);
-    let previousScheduleDate = await fetchPreviousScheduleDate(mondayDate);
-    let nextScheduleDate = await fetchNextScheduleDate(mondayDate);
+    let previousScheduleDate = await fetchPreviousScheduleDate(mondayDate, true);
+    let nextScheduleDate = await fetchNextScheduleDate(mondayDate, true);
     
     if (weeklySchedule === null) {
         if (nextScheduleDate !== null) {

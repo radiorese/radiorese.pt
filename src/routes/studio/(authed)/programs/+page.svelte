@@ -147,21 +147,16 @@
 	}
 
 	#toolBar {
-        display: flex;
-        gap:0.5rem;
-        width: fit-content;
-        align-items: center;
-        width: 100%;
 
         input{
-            height: 3rem;
+            height: 100%;
             border: 1px solid var(--main5);
             min-width: 0px;
             width: 100%;
         }
 
         input:focus{
-            border:1px solid rgb(161, 161, 161);
+            border:1px solid var(--main3);
         }
 
         #newProgram{

@@ -177,12 +177,77 @@
 		color: var(--secondary);
 	}
 
+	:global(input[type=number]) {
+		-webkit-appearance: none;
+		-moz-appearance: textfield;
+		border: 1px solid var(--main5);
+		border-radius: 0.5rem;
+		max-height: 3rem;
+	}
+
+	:global(input[type=text]){
+		border: 1px solid var(--main5);
+		border-radius: 0.5rem;
+		max-height: 3rem;
+	}
+
+	:global(textarea){
+		border: 1px solid var(--main5);
+		border-radius: 0.5rem;
+		max-height: 3rem;
+	}
+
+	:global(input[type=number]:focus, input[type=text]:focus, textarea:focus) {
+		outline: 1px solid var(--main3);
+	}
+
+	:global(.concatenatedInput) {
+		cursor: help;
+		display: flex;
+		height: 3rem;
+		border: 1px solid var(--main5);
+		align-items: center;
+		width: fit-content;
+		border-radius: 0.5rem;
+
+		:global(p) {
+			cursor: auto;
+			color: var(--main3);
+			padding-left: 1rem;
+			padding-right: 0.5rem;
+			height: 3rem;
+			display: flex;
+			align-items: center;
+		}
+
+		:global(input[type=number], input[type=text]) {
+			border: none;
+			height: 3rem;
+			min-width: 3rem;
+			border-radius: 0;
+			padding: 0px;
+			padding-right: 1rem;
+		}
+
+		:global(input[type=number]:focus, input[type=text]:focus) {
+			outline: none;
+		}
+	}
+
+	:global(.concatenatedInput:focus-within) {
+		border-color: var(--main3);
+	}
+
+	:global(.concatenatedInput:hover) {
+		background-color: var(--offSecondary);
+	}
+
 	:global(.bold) {
 		font-family: 'ApfelGrotezkBold', sans;
 	}
 
 	:global(.glassMorphic) {
-		background: linear-gradient(0deg, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.8) 100%),
+		background: linear-gradient(0deg, rgba(18, 18, 18, 0.8) 100%, rgba(18, 18, 18, 0.8) 100%),
 			linear-gradient(171deg, rgba(255, 255, 255, 0.01) 0.19%, rgba(255, 255, 255, 0) 101.78%);
 		backdrop-filter: blur(50px);
 	}
@@ -249,6 +314,11 @@
 		}
 	}
 
+	:global(.iconSize0) {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
 	:global(.iconSize1) {
 		width: 1rem;
 		height: 1rem;
@@ -300,6 +370,10 @@
 		color: var(--yellow);
 	}
 
+	:global(.cGreen) {
+		color: var(--green);
+	}
+
 	:global(.bgGreen) {
 		background-color: var(--green);
 	}
@@ -322,6 +396,22 @@
 
 	/*border radius*/
 
+	:global(#toolBar) {
+		display: flex;
+        gap: 0.5rem;
+        width: fit-content;
+        align-items: center;
+        width: 100%;
+        height: 3rem;
+
+		:global(div) {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+		}
+	}
+
 	:global(.bRadius0) {
 		border-radius: 0;
 	}
@@ -343,7 +433,6 @@
 	}
 
 	/* spacing*/
-
 	
 
 	:global(.spaceBetween) {
@@ -354,11 +443,34 @@
 
 	:global(.whiteButton){
 		background-color: var(--main1);
+		border: none;
 		white-space: no-wrap;
 		color: var(--secondary);
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
 		font-size: 1rem;
+		min-height: 3rem;
+	}
+
+	:global(.strokeButton){
+		background-color: var(--secondary);
+		border: 1px solid var(--main5);
+		white-space: no-wrap;
+		color: var(--main1);
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		min-height: 3rem;
+	}
+
+	:global(.strokeButton:hover){
+		background-color: var(--offSecondary);
+	}
+
+	:global(.verticalLine){
+		width: 1px;
+		background-color: var(--main5);
+		height: 100%;
 	}
 
 	:global(::selection){

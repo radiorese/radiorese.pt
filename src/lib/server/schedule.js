@@ -5,7 +5,10 @@ export async function fetchWeeklySchedule(mondayDate) {
     let checkIfWeeklySchedule = await db.query('SELECT * FROM schedule WHERE startingdate = $1', [mondayDate]);
 
     if (checkIfWeeklySchedule.rows.length === 0) {
-        return [ [], [], [], [], [], [], []];
+        return { 
+            schedule: [ [], [], [], [], [], [], []],
+            isPublic: false
+        };
     }
 
     let weeklySchedule = [];
@@ -19,20 +22,23 @@ export async function fetchWeeklySchedule(mondayDate) {
         weeklySchedule[index] = dailySchedule.rows;
     }
     
-    return weeklySchedule;
+    return {
+        schedule: weeklySchedule,
+        isPublic: checkIfWeeklySchedule.rows[0].ispublic
+    };
     
 }
 
 export async function fetchPublicWeeklySchedule(monday) {
 
-    let weeklySchedule = await fetchWeeklySchedule(monday);
-    const emptySchedule = [[], [], [], [], [], [], []];
-
-    if (weeklySchedule === emptySchedule) {
+    let result = await fetchWeeklySchedule(monday);
+    
+    // Only return schedules marked as public
+    if (result.schedule.every(day => day.length === 0) || !result.isPublic) {
         return null; 
     }
 
-    weeklySchedule = weeklySchedule.map(day => 
+    let weeklySchedule = result.schedule.map(day => 
         day.map(episode => ({
             programId: episode.episode_program_id,
             episodeNumber: episode.episode_number,
@@ -91,20 +97,31 @@ export async function fetchPublicDaySchedule(date) {
     return dailyScheduleArray;
 }
 
-export async function fetchNextScheduleDate(monday) {
+export async function fetchNextScheduleDate(monday, publicOnly = false) {
      const mondayDate = new Date(monday);
-     const result = await db.query(
-         'SELECT startingdate FROM schedule WHERE startingdate > $1 ORDER BY startingdate ASC LIMIT 1',
-         [mondayDate]
-     );
+     const query = publicOnly 
+         ? 'SELECT startingdate FROM schedule WHERE startingdate > $1 AND ispublic = true ORDER BY startingdate ASC LIMIT 1'
+         : 'SELECT startingdate FROM schedule WHERE startingdate > $1 ORDER BY startingdate ASC LIMIT 1';
+     
+     const result = await db.query(query, [mondayDate]);
      return result.rows.length > 0 ? result.rows[0].startingdate.toISOString().split('T')[0] : null;
 }
 
-export async function fetchPreviousScheduleDate(monday) {
+export async function fetchPreviousScheduleDate(monday, publicOnly = false) {
     const mondayDate = new Date(monday);
-    const result = await db.query(
-        'SELECT startingdate FROM schedule WHERE startingdate < $1 ORDER BY startingdate DESC LIMIT 1',
-        [mondayDate]
-    );
+    const query = publicOnly 
+        ? 'SELECT startingdate FROM schedule WHERE startingdate < $1 AND ispublic = true ORDER BY startingdate DESC LIMIT 1'
+        : 'SELECT startingdate FROM schedule WHERE startingdate < $1 ORDER BY startingdate DESC LIMIT 1';
+    
+    const result = await db.query(query, [mondayDate]);
     return result.rows.length > 0 ? result.rows[0].startingdate.toISOString().split('T')[0] : null;
+}
+
+export async function fetchAllScheduleDates(publicOnly = false) {
+    const query = publicOnly 
+        ? 'SELECT startingdate, endingdate, ispublic FROM schedule WHERE ispublic = true ORDER BY startingdate DESC'
+        : 'SELECT startingdate, endingdate, ispublic FROM schedule ORDER BY startingdate DESC';
+    
+    const result = await db.query(query);
+    return result.rows;
 }

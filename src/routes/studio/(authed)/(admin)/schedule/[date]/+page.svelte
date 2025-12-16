@@ -1,20 +1,29 @@
 <script>
 	import { formatDate, isToday, isThisWeek } from '$lib/utils/dates.js';
+	import { Select, DropdownMenu } from 'bits-ui';
+	import selectIcon from '$lib/icons/select.svg';
+	import checkIcon from '$lib/icons/check.svg';
+	import threeDotsIcon from '$lib/icons/threeDots.svg';
+	import pasteIcon from '$lib/icons/paste.svg';
+	import copyIcon from '$lib/icons/copy.svg';
+	import deleteIcon from '$lib/icons/delete.svg';
+	import discIcon from '$lib/icons/disc.svg';
+	import saveIcon from '$lib/icons/save.svg';
 
 	let { data } = $props();
 	let mondayDate = data.mondayDate;
 	let thisWeek = isThisWeek(mondayDate, new Date(mondayDate).setDate(new Date(mondayDate).getDate() + 6));
 	let programs = data.allPrograms;
+	let scheduleDates = data.scheduleDates;
+	let isPublic = $state(data.isPublic);
 
 	import undoIcon from '$lib/icons/undo.svg';
 	import forwardIcon from '$lib/icons/redo.svg';
 
-	import deleteIcon from '$lib/icons/delete.svg';
-
 	let episodes = $state(data.weeklySchedule);
 	let dailyNumberOfEpisodes = $state(episodes.map(day => day.length));
 
-	let startingHour = $state(8);
+	let startingHour = $state(data.startingHour || 8);
 	let startingSeconds = $derived(startingHour * 60 * 60);
 
 	let days = $state([
@@ -26,8 +35,6 @@
 		{ name: 'Sábado', collapsed: true},
 		{ name: 'Domingo', collapsed: true}
 	]);
-
-	
 
 	function goToPreviousWeek() {
 		let previousWeek = new Date(mondayDate);
@@ -72,54 +79,149 @@
 
 <main>
 	<!--title section-->
-	<div id="titleBanner">
-		<button onclick={goToPreviousWeek} aria-label="Previous Week">
-			<image src={undoIcon} alt="Previous Week" class="iconSize1" />
-		</button>
-		<div id="titleDiv">
-			<h1 class="tSize2">Horário Semanal</h1>
-			<h2 class="tSize2 cMain2">
-				{formatDate(mondayDate)} - {formatDate(
-					new Date(mondayDate).setDate(new Date(mondayDate).getDate() + 6)
-				)}
-				{#if thisWeek}
-					<b class="tSize2 cRed"> (Esta Semana) </b>
-				{/if}
-			</h2>
+	<div id="titleGroup" class="mBottom-xl">
+		<h1 class="tSize3">Horário <b class=" tSize3 hideOnMobile">Semanal</b></h1>
+		<div id="weekSelection">
+			<button onclick={goToPreviousWeek} aria-label="Previous Week" class="iconSize1">
+				<img src={undoIcon} alt="Previous Week" class="iconSize1" />
+			</button>
+			<Select.Root
+				type="single"
+				onValueChange={async (e) => {open=false; window.location.href = `/studio/schedule/${e}`;}}
+			>
+				<Select.Trigger
+					style="min-width: 12rem; max-height: 2.5rem;"
+					aria-label={thisWeek ? 'Semana Atual' : formatDate(new Date(mondayDate))}
+				>
+					<p>{formatDate(new Date(mondayDate))} - {formatDate(new Date(new Date(mondayDate).setDate(new Date(mondayDate).getDate() + 6)))}</p>
+					<image src={selectIcon} alt="Select Icon" class="iconSize1" />
+
+				</Select.Trigger>
+				<Select.Portal>
+					<Select.Content>
+					<Select.Viewport>
+						{#each scheduleDates as date}
+							{@const startingDateStr = new Date(date.startingdate.getTime() - date.startingdate.getTimezoneOffset() * 60000).toISOString().split('T')[0]}
+							<Select.Item
+								value={startingDateStr}
+								class="spaceBetween"
+							>
+								<p>{formatDate(date.startingdate)} - {formatDate(date.endingdate)}</p>
+								{#if startingDateStr === mondayDate}
+									<img src={checkIcon} alt="Current Week" class="iconSize0" />
+								{/if}
+							</Select.Item>
+						{/each}
+					</Select.Viewport>
+					</Select.Content>
+				</Select.Portal>
+			</Select.Root>
+			<button onclick={goToNextWeek} aria-label="Next Week" class="iconSize1">
+				<img src={forwardIcon} alt="Next Week" class="iconSize1" />
+			</button>
 		</div>
-		<button onclick={goToNextWeek} aria-label="Next Week">
-			<image src={forwardIcon} alt="Next Week" class="iconSize1" />
-		</button>
 	</div>
 
-	<!--Form Section: Global Control and Schedule Days-->
-	<form method="POST" action="?/submitSchedule">
 
-		<!--Global Control Section-->
-		<div id="middleBanner" class="bRadius1 mBottom-m">
-			<p>
-				Hora de Começo
-				<input type="number" name="startingHour" bind:value={startingHour} min="0" max="23" />
-			</p>
-
-			<div>
-
-			<button class="cRed" onclick={() => { event.preventDefault(); episodes = [[], [], [], [], [], [], [] ]; dailyNumberOfEpisodes = [0, 0, 0, 0, 0, 0, 0]; }}>
-					Reset
-				</button>
+	<form method="POST">
+		<!--toolbar section-->
+		<div id="toolBar" class="mBottom-xl spaceBetween">
+			<div class="concatenatedInput">
+				<label for="startingHour"><p class="hideOnMobile">Hora de Começo:</p><p class="hideOnDesktop">Começo (h):</p></label>
+				<input type="number" id="startingHour" name="startingHour" bind:value={startingHour} min="0" max="23" />
+			</div>
+			<div class="flexRow">
+				<p class="cMain3 mRight-m mLeft-xl">
+					<b class="{isPublic ? 'cGreen' : 'cRed'} bold">· </b> 
+					{isPublic ? 'Público' : 'Não publicado'}
+				</p>
 				
-				<button onclick={() => { event.preventDefault(); navigator.clipboard.writeText(JSON.stringify(episodes)); }}>
-					Copiar
+				<button type="submit" formaction="?/saveSchedule" class="strokeButton hideOnMobile">Guardar</button>
+				<button 
+					type="submit" 
+					formaction={isPublic ? "?/unpublishSchedule" : "?/publishSchedule"}
+					class="whiteButton hideOnMobile"
+				>
+					{isPublic ? 'Despublicar' : 'Publicar'}
 				</button>
-				<button onclick={() => { event.preventDefault(); pasteEpisodes(JSON.parse(prompt('Colar')))}}>
-					Colar
-				</button>
-				
-				<button type="submit"> Guardar </button>
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger aria-label="Menu">
+						<img src={threeDotsIcon} alt="Menu" class="iconSize2" />
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Portal>
+						<DropdownMenu.Content>
+							<DropdownMenu.Item
+								class="dropdownItem hideOnDesktop"
+								onSelect={(e) => {
+									const form = document.querySelector('form');
+									const submitButton = document.createElement('button');
+									submitButton.type = 'submit';
+									submitButton.formAction = '?/saveSchedule';
+									submitButton.style.display = 'none';
+									form.appendChild(submitButton);
+									submitButton.click();
+								}}
+							>
+								<img src={saveIcon} alt="Save Schedule" class="iconSize1 mRight-m" />
+								<p>Guardar</p>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item
+								class="dropdownItem hideOnDesktop"
+								onSelect={(e) => {
+									const form = document.querySelector('form');
+									const submitButton = document.createElement('button');
+									submitButton.type = 'submit';
+									submitButton.formAction = isPublic ? '?/unpublishSchedule' : '?/publishSchedule';
+									submitButton.style.display = 'none';
+									form.appendChild(submitButton);
+									submitButton.click();
+								}}
+							>
+								<img src={discIcon} alt="Publish/Unpublish Schedule" class="iconSize1 mRight-m" />
+								<p>{isPublic ? 'Despublicar' : 'Publicar'}</p>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item
+								class="dropdownItem"
+								onclick={(e) => {
+									navigator.clipboard.writeText(JSON.stringify(episodes));
+								}}
+							>
+								<img src={copyIcon} alt="Copy Schedule" class="iconSize1 mRight-m" />
+								<p>Copiar Horário</p>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item
+								class="dropdownItem"
+								onclick={() => {
+									pasteEpisodes(JSON.parse(prompt('Colar')));
+								}}
+							>
+								<img src={pasteIcon} alt="Paste Schedule" class="iconSize1 mRight-m" />
+								<p>Colar Horário</p>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item
+								class="dropdownItem"
+								onSelect={() => {
+									if (confirm('Tem certeza que deseja eliminar este horário?')) {
+										const form = document.querySelector('form');
+										const submitButton = document.createElement('button');
+										submitButton.type = 'submit';
+										submitButton.formAction = '?/deleteSchedule';
+										submitButton.style.display = 'none';
+										form.appendChild(submitButton);
+										submitButton.click();
+									}
+								}}
+							>	
+								<img src={deleteIcon} alt="Delete Schedule" class="iconSize1 mRight-m" />
+								<p>Eliminar Horário</p>
+							</DropdownMenu.Item>
+						</DropdownMenu.Content>
+					</DropdownMenu.Portal>
+			</DropdownMenu.Root>
 			</div>
 		</div>
 
-		<!--Schedule Days Section-->
+		<!--schedule days section-->
 		<div id="scheduleDays" class="">
 
 			<input type="hidden" name="episodes" value={JSON.stringify(episodes)} />
@@ -268,16 +370,20 @@
 		}
 	}
 
-	#titleBanner {
+	#titleGroup {
 		display: flex;
-		justify-content: space-between;
+		justify-content: left;
+		gap: 1rem;
 		align-items: center;
-		margin-bottom: 1rem;
-		#titleDiv {
+		#weekSelection {
 			display: flex;
-			flex-direction: column;
 			align-items: center;
+			gap: 0.5rem;
 		}
+	}
+
+	#toolBar {
+		
 	}
 
 	#middleBanner {
