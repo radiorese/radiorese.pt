@@ -5,7 +5,7 @@
 	//console.log(episodes);
 
 	
-	let unavailableEpisodes = episodes.filter((episode) => !episode.isavailablelocally);
+	let unavailableEpisodes = episodes;
 	let selectedUnavailableEpisodes = $state([]);
 
 	function toggleUnavailableEpisodeSelection(index, episode) {
@@ -16,23 +16,6 @@
 			selectedUnavailableEpisodes.splice(episodeIndex, 1);
 		} else {
 			selectedUnavailableEpisodes.push({
-				programId: episode.program.id,
-				number: episode.number
-			});
-		}
-	}
-
-	let availableEpisodes = episodes.filter((episode) => episode.isavailablelocally);
-	let selectedAvailableEpisodes = $state([]);
-
-	function toggleAvailableEpisodeSelection(index, episode) {
-		const episodeIndex = selectedAvailableEpisodes.findIndex(
-			(e) => e.programId === episode.program.id && e.number === episode.number
-		);
-		if (episodeIndex !== -1) {
-			selectedAvailableEpisodes.splice(episodeIndex, 1);
-		} else {
-			selectedAvailableEpisodes.push({
 				programId: episode.program.id,
 				number: episode.number
 			});
@@ -65,24 +48,29 @@
 	Episódios por Baixar <b class="cMain3 tSize2">({unavailableEpisodes.length})</b>
 </h1>
 
+{#if unavailableEpisodes.length === 0}
+	<p class="mBottom-m">Todos os episódios estão baixados localmente.</p>
+{:else}
 <table class="mBottom-m">
 	<thead>
 		<tr>
-			<th class="cMain4"> </th>
 			<th class="cMain4">Episódio (Programa)</th>
+			
 		</tr>
 	</thead>
 	<tbody>
 		{#each unavailableEpisodes as episode, index}
 			<tr class="available">
 				<td>
+					{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
+					<b class="cMain3">{episode.program.title}</b>
+				</td>
+				<td>
 					<input
 						type="checkbox"
 						onchange={() => toggleUnavailableEpisodeSelection(index, episode)}
 					/>
 				</td>
-				<td>{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
-					<b class="cMain3">{episode.program.title}</b></td>
 				<td>
 					<a aria-label="download" href={getDriveDownloadLink(episode.filelink)} target="_blank">
                         <image src={downloadIcon} class="iconSize1"></image>
@@ -103,51 +91,9 @@
 		<button type="submit" class="whiteButton">Já baixei os episódios</button>
 	{/if}
 </form>
+{/if}
 
-<!--Downloaded Episodes-->
 
-<h1 class="tSize3 mTop-xl mBottom-m">
-	Episódios no Computador <b class="cMain3 tSize2">({availableEpisodes.length})</b>
-</h1>
-
-<table class="mBottom-m">
-	<thead>
-		<tr>
-			<th class="cMain4"> </th>
-			<th class="cMain4">Episódio</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each availableEpisodes as episode, index}
-			<tr class="available">
-				<td>
-					<input
-						type="checkbox"
-						onchange={() => toggleAvailableEpisodeSelection(index, episode)}
-					/>
-				</td>
-				<td>{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
-					<b class="cMain3">{episode.program.title}</b></td>
-				<td>
-					<a aria-label="download" href={getDriveDownloadLink(episode.filelink)} target="_blank">
-                        <image src={downloadIcon} class="iconSize1"></image>
-                    </a>
-				</td>
-			</tr>
-		{/each}
-	</tbody>
-</table>
-
-<form method="POST" action="?/unMarkDownloads">
-	<input
-		type="hidden"
-		name="episodes"
-		value={JSON.stringify(selectedAvailableEpisodes)}
-	/>
-	{#if selectedAvailableEpisodes.length > 0}
-		<button type="submit" class="whiteButton">Não estão no computador</button>
-	{/if}
-</form>
 
 <style>
 	table {
@@ -166,7 +112,7 @@
 				width: 5%;
 			}
 
-			td:nth-child(2){
+			td:nth-child(1){
 				width: 90%;
 			}
 		}
