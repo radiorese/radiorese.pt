@@ -49,7 +49,8 @@
 
 [data-select-content] {
     z-index: 50;
-    max-height: calc(var(--bits-select-content-available-height)/1.618);
+    max-height: calc(650px);
+    height: calc(var(--bits-select-content-available-height) - var(--globalMargin));
     width: var(--bits-select-anchor-width);
     min-width: var(--bits-select-anchor-width);
     background: var(--secondary);

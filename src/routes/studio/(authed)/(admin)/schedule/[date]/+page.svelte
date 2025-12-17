@@ -150,13 +150,13 @@
 					{isPublic ? 'Despublicar' : 'Publicar'}
 				</button>
 				<DropdownMenu.Root>
-					<DropdownMenu.Trigger aria-label="Menu" class="hideOnDesktop">
+					<DropdownMenu.Trigger aria-label="Menu">
 						<img src={threeDotsIcon} alt="Menu" class="iconSize2" />
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Portal>
 						<DropdownMenu.Content>
 							<DropdownMenu.Item
-								class="dropdownItem"
+								class="dropdownItem hideOnDesktop"
 								onclick={() => {
 									const newHour = prompt('Hora de Começo (0-23):', startingHour);
 									if (newHour !== null && newHour >= 0 && newHour <= 23) {
