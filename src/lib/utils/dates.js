@@ -56,3 +56,12 @@ export function getRelativeWeekString(mondayDate) {
         return `Há ${Math.abs(diffInWeeks)} Semanas Atrás`;
     }
 }
+
+export function formatTimestampToDay(timestamp) {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear().toString().slice(-2);
+    return `${day}${month}'${year}`;
+}

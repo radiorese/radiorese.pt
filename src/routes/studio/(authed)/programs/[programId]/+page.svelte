@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { formatTimestampToDay } from '$lib/utils/dates.js';
 	let { data } = $props();
 
 	if (!data.userRole) {
@@ -72,6 +73,7 @@
 			<tr>
 				<th class="cMain4">#</th>
 				<th class="cMain4">Título</th>
+				<th class="cMain4">Data (Criado)</th>
 				<th class="cMain4 hideOnMobile">Curado por</th>
 			</tr>
 		</thead>
@@ -81,6 +83,7 @@
 					<tr class="available" onclick={() => goto(`/studio/programs/${program.id}/${episode.number}`)}>
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
+						<td class="cMain3">{formatTimestampToDay(episode.datecreated)}</td>
 						<td class="hideOnMobile">
 							{#each episode.curators as curator, index}
 								{curator}{index < episode.curators.length - 1 ? ', ' : ''}
@@ -138,6 +141,8 @@
 		tbody .available {
 			cursor: pointer;
 		}
+
+		
 	}
 
 	#titleDiv{

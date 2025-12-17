@@ -1,5 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
+    import { formatTimestampToDay } from '$lib/utils/dates.js';
 
     let { data } = $props();
     let episode = data.episode;
@@ -41,6 +42,12 @@
             {Math.floor(episode.duration / 3600) > 0 ? `${Math.floor(episode.duration / 3600)} hr, ` : ''}
             {Math.floor((episode.duration % 3600) / 60) > 0 ? `${Math.floor((episode.duration % 3600) / 60)} min, ` : ''}
             {episode.duration % 60} seg
+        </p>
+    </div>
+    <div>
+        <h2 class="tSize1 cMain4 mBottom-s">Data criado</h2>
+        <p class="tSize2">
+            {formatTimestampToDay(episode.datecreated)}
         </p>
     </div>
 </div>
