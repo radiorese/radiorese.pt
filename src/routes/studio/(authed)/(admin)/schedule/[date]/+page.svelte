@@ -8,6 +8,7 @@
 	import copyIcon from '$lib/icons/copy.svg';
 	import deleteIcon from '$lib/icons/delete.svg';
 	import clockIcon from '$lib/icons/clock.svg';
+	import starIcon from '$lib/icons/star.svg';
 
 	let { data } = $props();
 	let mondayDate = data.mondayDate;
@@ -70,6 +71,40 @@
 			day.forEach((episode, episodeIndex) => {
 				document.getElementById(`d${dayIndex}i${episodeIndex}p${episode.programId}`).selected = true;
 				document.getElementById(`d${dayIndex}i${episodeIndex}p${episode.programId}e${episode.episodeNumber}`).selected = true;
+			});
+		});
+	}
+
+	function setBestEpisodes() {
+		episodes.forEach((day, dayIndex) => {
+			day.forEach((episode, episodeIndex) => {
+				// Only process if a program is selected
+				if (episode.programId) {
+					const program = programs.find(p => p.id == episode.programId);
+					if (program && program.episodes.length > 0) {
+						// Find the minimum number of appearances
+						const minAppearances = Math.min(...program.episodes.map(ep => ep.previousAppearances));
+						
+						// Filter episodes with the minimum appearances
+						const candidateEpisodes = program.episodes.filter(ep => ep.previousAppearances === minAppearances);
+						
+						// From those candidates, select the one with the lowest episode number
+						const bestEpisode = candidateEpisodes.reduce((best, current) => 
+							current.number < best.number ? current : best
+						);
+						
+						// Update the episode number
+						episodes[dayIndex][episodeIndex].episodeNumber = bestEpisode.number;
+						
+						// Update the select elements in the DOM
+						setTimeout(() => {
+							const episodeSelect = document.getElementById(`d${dayIndex}i${episodeIndex}p${episode.programId}e${bestEpisode.number}`);
+							if (episodeSelect) {
+								episodeSelect.selected = true;
+							}
+						}, 0);
+					}
+				}
 			});
 		});
 	}
@@ -166,6 +201,15 @@
 							>
 								<img src={clockIcon} alt="Clock" class="iconSize1 mRight-m" />
 								<p>Hora de Começo</p>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item
+								class="dropdownItem"
+								onclick={() => {
+									setBestEpisodes();
+								}}
+							>
+								<img src={starIcon} alt="Star" class="iconSize1 mRight-m" />
+								<p>Auto-selecionar (episódios)</p>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item
 								class="dropdownItem"
