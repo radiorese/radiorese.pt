@@ -314,6 +314,12 @@
 		}
 	}
 
+	@media (max-width: 600px) {
+		:global(html){
+			font-size: 90%;
+		}
+	}
+
 	:global(.iconSize0) {
 		width: 0.75rem;
 		height: 0.75rem;

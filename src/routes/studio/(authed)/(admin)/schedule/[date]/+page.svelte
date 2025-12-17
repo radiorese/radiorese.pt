@@ -7,8 +7,7 @@
 	import pasteIcon from '$lib/icons/paste.svg';
 	import copyIcon from '$lib/icons/copy.svg';
 	import deleteIcon from '$lib/icons/delete.svg';
-	import discIcon from '$lib/icons/disc.svg';
-	import saveIcon from '$lib/icons/save.svg';
+	import clockIcon from '$lib/icons/clock.svg';
 
 	let { data } = $props();
 	let mondayDate = data.mondayDate;
@@ -126,59 +125,47 @@
 	<form method="POST">
 		<!--toolbar section-->
 		<div id="toolBar" class="mBottom-xl spaceBetween">
-			<div class="concatenatedInput">
-				<label for="startingHour"><p class="hideOnMobile">Hora de Começo:</p><p class="hideOnDesktop">Começo (h):</p></label>
-				<input type="number" id="startingHour" name="startingHour" bind:value={startingHour} min="0" max="23" />
+			<div class="flexRow">
+				<div class="concatenatedInput hideOnMobile">
+					<label for="startingHour"><p>Hora de Começo:</p></label>
+					<input type="number" id="startingHour" name="startingHour" bind:value={startingHour} min="0" max="23" />
+				</div>
+				<p class="cMain3 mRight-m mLeft-s hideOnDesktop">
+					<b class="{isPublic ? 'cGreen' : 'cRed'} bold">· </b> 
+					{isPublic ? 'Público' : 'Não publicado'}
+				</p>
 			</div>
 			<div class="flexRow">
-				<p class="cMain3 mRight-m mLeft-xl">
+				<p class="cMain3 mRight-m mLeft-xl hideOnMobile">
 					<b class="{isPublic ? 'cGreen' : 'cRed'} bold">· </b> 
 					{isPublic ? 'Público' : 'Não publicado'}
 				</p>
 				
-				<button type="submit" formaction="?/saveSchedule" class="strokeButton hideOnMobile">Guardar</button>
+				<button type="submit" formaction="?/saveSchedule" class="strokeButton">Guardar</button>
 				<button 
 					type="submit" 
 					formaction={isPublic ? "?/unpublishSchedule" : "?/publishSchedule"}
-					class="whiteButton hideOnMobile"
+					class="whiteButton"
 				>
 					{isPublic ? 'Despublicar' : 'Publicar'}
 				</button>
 				<DropdownMenu.Root>
-					<DropdownMenu.Trigger aria-label="Menu">
+					<DropdownMenu.Trigger aria-label="Menu" class="hideOnDesktop">
 						<img src={threeDotsIcon} alt="Menu" class="iconSize2" />
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Portal>
 						<DropdownMenu.Content>
 							<DropdownMenu.Item
-								class="dropdownItem hideOnDesktop"
-								onSelect={(e) => {
-									const form = document.querySelector('form');
-									const submitButton = document.createElement('button');
-									submitButton.type = 'submit';
-									submitButton.formAction = '?/saveSchedule';
-									submitButton.style.display = 'none';
-									form.appendChild(submitButton);
-									submitButton.click();
+								class="dropdownItem"
+								onclick={() => {
+									const newHour = prompt('Hora de Começo (0-23):', startingHour);
+									if (newHour !== null && newHour >= 0 && newHour <= 23) {
+										startingHour = parseInt(newHour);
+									}
 								}}
 							>
-								<img src={saveIcon} alt="Save Schedule" class="iconSize1 mRight-m" />
-								<p>Guardar</p>
-							</DropdownMenu.Item>
-							<DropdownMenu.Item
-								class="dropdownItem hideOnDesktop"
-								onSelect={(e) => {
-									const form = document.querySelector('form');
-									const submitButton = document.createElement('button');
-									submitButton.type = 'submit';
-									submitButton.formAction = isPublic ? '?/unpublishSchedule' : '?/publishSchedule';
-									submitButton.style.display = 'none';
-									form.appendChild(submitButton);
-									submitButton.click();
-								}}
-							>
-								<img src={discIcon} alt="Publish/Unpublish Schedule" class="iconSize1 mRight-m" />
-								<p>{isPublic ? 'Despublicar' : 'Publicar'}</p>
+								<img src={clockIcon} alt="Clock" class="iconSize1 mRight-m" />
+								<p>Hora de Começo</p>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item
 								class="dropdownItem"
