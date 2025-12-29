@@ -268,6 +268,10 @@
 		text-decoration: underline;
 	}
 
+	:global(.cursorPointer){
+		cursor: pointer;
+	}
+
 	:global(.tSize1) {
 		font-size: 1rem;
 	}
@@ -445,6 +449,42 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	/* components */
+
+	:global(.plainTable) {
+		width: 100%;
+		border-collapse: collapse;
+        border: 1px solid var(--main5);
+
+		:global(th,
+		td) {
+			padding: 1rem;
+			
+			:global(img){
+				align-items: center;
+			}
+		}
+
+        :global(tbody){
+            border-spacing: 1rem;
+        }
+
+        :global(tbody tr){
+            border: 1px solid var(--main5);
+			height: 4rem;
+        }
+
+		:global(.fowardIcon) {
+			transition: var(--globalTransitionTime);
+		}
+		:global(tbody tr:hover) {
+			background-color: var(--offSecondary);
+			:global(.fowardIcon) {
+				rotate: -45deg;
+			}
+		}
 	}
 
 	:global(.whiteButton){

@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	let { data, form } = $props();
 
 	let episodes = data.episodes;
@@ -33,6 +34,14 @@
 		return originalLink;
 	}
 
+	function goToEpisode(id, number){
+		goto(`/studio/programs/${id}/${number}`);
+	}
+
+	function goToProgram(id){
+		goto(`/studio/programs/${id}`);
+	}
+
 	import downloadIcon from '$lib/icons/download.svg';
 </script>
 
@@ -51,7 +60,7 @@
 {#if unavailableEpisodes.length === 0}
 	<p class="mBottom-m">Todos os episódios estão baixados localmente.</p>
 {:else}
-<table class="mBottom-m">
+<table class="mBottom-m plainTable">
 	<thead>
 		<tr>
 			<th class="cMain4">Episódio (Programa)</th>
@@ -62,11 +71,13 @@
 		{#each unavailableEpisodes as episode, index}
 			<tr class="available">
 				<td>
-					{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> <br> 
-					<b class="cMain3">{episode.program.title}</b>
+					<a class="cursorPointer" onclick={goToProgram(episode.program_id, episode.number)}>{episode.title} <b class="cMain5">({episode.number}º Episódio)</b> </a> <br> 
+					<a class="cursorPointer" onclick={goToEpisode(episode.program_id, episode.number)}><b class="cMain3">{episode.program.title}</b></a>
+					
 				</td>
 				<td>
 					<input
+						class="cursorPointer"
 						type="checkbox"
 						onchange={() => toggleUnavailableEpisodeSelection(index, episode)}
 					/>
@@ -88,7 +99,7 @@
 		value={JSON.stringify(selectedUnavailableEpisodes)}
 	/>
 	{#if selectedUnavailableEpisodes.length > 0}
-		<button type="submit" class="whiteButton">Já baixei os episódios</button>
+		<button type="submit" class="whiteButton mTop-l">Já baixei os episódios</button>
 	{/if}
 </form>
 {/if}
@@ -97,17 +108,7 @@
 
 <style>
 	table {
-		width: 100%;
-		border-collapse: collapse;
-
-		th,
-		td {
-			padding: 1rem;
-		}
-
 		tr {
-			border-bottom: 1px solid var(--main3);
-			td:nth-child(1),
 			td:nth-child(3) {
 				width: 5%;
 			}
@@ -115,10 +116,6 @@
 			td:nth-child(1){
 				width: 90%;
 			}
-		}
-
-		tbody tr:last-child {
-			border-bottom: none;
 		}
 	}
 

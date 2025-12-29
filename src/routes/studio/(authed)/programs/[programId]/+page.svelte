@@ -68,7 +68,7 @@
 			<button onclick={() => goto(`/studio/programs/${program.id}/newEpisode`)} class="whiteButton">Adicionar Episódio</button>
 		{/if}
 	</div>
-	<table class="">
+	<table class="plainTable mTop-l">
 		<thead>
 			<tr>
 				<th class="cMain4">#</th>
@@ -80,7 +80,7 @@
 		<tbody>
 			{#each program.episodes as episode}
 				{#if userRole === 'admin' || userRole === 'programCurator' || episode.curators.includes(user.name)}
-					<tr class="available" onclick={() => goto(`/studio/programs/${program.id}/${episode.number}`)}>
+					<tr class="cursorPointer" onclick={() => goto(`/studio/programs/${program.id}/${episode.number}`)}>
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
 						<td class="cMain3">{formatTimestampToDay(episode.datecreated)}</td>
@@ -94,7 +94,7 @@
 						</td>
 					</tr>
 				{:else}
-					<tr>
+					<tr class="">
 						<td class="cMain5">{episode.number}</td>
 						<td>{episode.title}</td>
 						<td class="hideOnMobile">
@@ -110,40 +110,6 @@
 {/if}
 
 <style>
-    table {
-		width: 100%;
-		border-collapse: collapse;
-
-		th,
-		td {
-			padding: 1.3rem 1rem;
-		}
-
-		tr {
-			border-bottom: 1px solid var(--main3);
-		}
-
-		tbody tr:last-child {
-			border-bottom: none;
-		}
-
-		.fowardIcon {
-			transition: var(--globalTransitionTime);
-		}
-
-		tbody .available:hover {
-			background-color: var(--offSecondary);
-			.fowardIcon {
-				rotate: -45deg;
-			}
-		}
-
-		tbody .available {
-			cursor: pointer;
-		}
-
-		
-	}
 
 	#titleDiv{
             display: flex;

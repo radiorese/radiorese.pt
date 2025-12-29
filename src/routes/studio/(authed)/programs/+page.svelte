@@ -62,7 +62,7 @@
 {#if filteredPrograms.length === 0}
     <p class="mTop-xl cMain2">Nenhum programa encontrado.</p>
 {:else}
-    <table class="mTop-xl">
+    <table class="mTop-xl plainTable">
         <thead>
             <tr>
                 <th class="cMain3">Mídia</th>
@@ -74,7 +74,7 @@
         
         <tbody>
             {#each filteredPrograms as program}
-                <tr onclick={() => handleRowClick(program.id)} class="mBottom-s">
+                <tr onclick={() => handleRowClick(program.id)} class="mBottom-s cursorPointer">
                     <td>
                         <img
                             class="iconSize2"
@@ -103,42 +103,7 @@
 {/if}
 
 <style>
-	table {
-		width: 100%;
-		border-collapse: collapse;
-        border: 1px solid var(--main5);
-
-		th,
-		td {
-			padding: 1rem;
-			
-			img{
-				align-items: center;
-			}
-		}
-
-        tbody{
-            border-spacing: 1rem;
-        }
-
-        tbody tr{
-            border: 1px solid var(--main5);
-        }
-
-		.fowardIcon {
-			transition: var(--globalTransitionTime);
-		}
-		tbody tr:hover {
-			background-color: var(--offSecondary);
-			.fowardIcon {
-				rotate: -45deg;
-			}
-		}
-
-		tbody tr {
-			cursor: pointer;
-		}
-	}
+	
 
 	#titleDiv {
 		display: flex;
