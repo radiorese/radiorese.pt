@@ -10,16 +10,16 @@
 
     import forwardIcon from '$lib/icons/forward.svg';
 
-    let selectedValues = $state('all');
+    let selectedValues = $state('');
     let searchTerm = $state('');
 
-    let filteredPrograms = $derived(data.programs.filter((program) => {
+    let filteredPrograms = $derived(programs.filter((program) => {
         const matchesSearch = searchTerm === '' || 
             program.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             program.curators.some((curator) => curator.toLowerCase().includes(searchTerm.toLowerCase())) ||
             program.creators.some((creator) => creator.toLowerCase().includes(searchTerm.toLowerCase()));
         
-        const matchesMediaType = selectedValues === 'all' || selectedValues === program.mediatype;
+        const matchesMediaType = selectedValues === '' || selectedValues === program.mediatype;
         
         return matchesSearch && matchesMediaType;
     }));
@@ -40,7 +40,6 @@
 <div id="toolBar" class="mTop-xl">
 
     <ToggleGroup.Root class="hideOnMobile" type="single" bind:value={selectedValues}>
-        <ToggleGroup.Item value="all">Todos</ToggleGroup.Item>
         <ToggleGroup.Item value="podcast">Rubricas</ToggleGroup.Item>
         <ToggleGroup.Item value="music">Música</ToggleGroup.Item>
     </ToggleGroup.Root>

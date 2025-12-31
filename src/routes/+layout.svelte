@@ -185,7 +185,7 @@
 		max-height: 3rem;
 	}
 
-	:global(input[type=text]){
+	:global(input[type=text], input[type=email], input[type=password], input[type=tel]){
 		border: 1px solid var(--main5);
 		border-radius: 0.5rem;
 		max-height: 3rem;
@@ -194,10 +194,9 @@
 	:global(textarea){
 		border: 1px solid var(--main5);
 		border-radius: 0.5rem;
-		max-height: 3rem;
 	}
 
-	:global(input[type=number]:focus, input[type=text]:focus, textarea:focus) {
+	:global(input[type=number]:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=tel]:focus, textarea:focus) {
 		outline: 1px solid var(--main3);
 	}
 

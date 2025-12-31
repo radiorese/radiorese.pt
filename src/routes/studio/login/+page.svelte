@@ -13,7 +13,7 @@
 		<img src={logo} alt="Logo" class="iconSize3 rotating" /> <h3 class="tSize3">Studio</h3>
 	</div>
 
-	<form method="post" use:enhance>
+	<form method="post">
 		<input class="solidBorder bRadius1" type="text" name="at" placeholder="@" bind:value={at} />
 		<input
 			class="solidBorder bRadius1"
@@ -39,7 +39,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: 100svh;
+		height: calc(100svh - var(--globalMargin));
 		gap: 2rem;
 
 		> #titleDiv {
