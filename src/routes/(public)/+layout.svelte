@@ -93,7 +93,7 @@
             <a href="https://www.instagram.com/radiorese.pt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="underlined">Instagram</a>
         </div>
 
-        <p id="credits">Website desenhado <br> e desenvolvido <br> por <a class="underlined">Rafa Silva Arias</a></p>
+        <p id="credits">Website desenhado <br> e desenvolvido <br> por <a target="_blank" href="https://rafasilvaarias.com" class="underlined">Rafa Silva Arias</a></p>
     </div>
 </footer>
 
